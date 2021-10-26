@@ -52,14 +52,18 @@ RUN set -eux; \
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	rm -rf /var/lib/apt/lists/*
 
+
+RUN apt-get update && apt-get install unzip
+
+# Change Apache docroot bypass composer vendor folder
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/docroot
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+# RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.con
+
 # Install Composer version 2
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Install Drush using Composer
-ENV DRUSH_VERSION 8
-RUN composer global require drush/drush:"$DRUSH_VERSION" --prefer-dist
+# Install Drush Launcher
 ADD https://github.com/drush-ops/drush-launcher/releases/latest/download/drush.phar /usr/bin/drush/
 RUN chmod +x /usr/bin/drush/drush.phar
 
-RUN apt-get update && apt-get install unzip
-# RUN drush --version

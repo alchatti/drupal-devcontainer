@@ -7,4 +7,4 @@ services:
       - "8585:8080"
     volumes:
       - "./scripts:/scripts"
-      - "./docroot:/var/www/html"
+      - "./workspace:/var/www/html"
