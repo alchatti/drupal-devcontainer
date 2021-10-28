@@ -13,9 +13,13 @@ services:
       # - "./database/db.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
     build: .
+    user: "1000:1000"
+    environment:
+      APACHE_RUN_USER: "#1000"
+      APACHE_RUN_GROUP: "#1000"
     ports:
       - "8585:80"
     volumes:
-      - "./settings/php.ini:/usr/local/etc/php/conf.d/min.ini"
+      - "./settings/php.ini:/usr/local/etc/php/conf.d/zphp.ini"
       - "./scripts:/scripts"
       - "./workspace:/var/www/html"

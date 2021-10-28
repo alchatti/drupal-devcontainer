@@ -67,3 +67,12 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 ADD https://github.com/drush-ops/drush-launcher/releases/latest/download/drush.phar /usr/bin/drush/
 RUN chmod +x /usr/bin/drush/drush.phar
 
+# Add `www-data` to group `appuser`
+# RUN addgroup --gid 1000 appuser; \
+# 	adduser --uid 1000 --gid 1000 --disabled-password appuser; \
+# 	adduser www-data appuser;
+
+# Set www-data to have UID 1000
+RUN usermod -u 1000 www-data;
+
+RUN chown -R www-data:www-data /var/www
