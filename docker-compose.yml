@@ -8,10 +8,14 @@ services:
       MYSQL_DATABASE: "drupal"
       MYSQL_USER: "drupal"
       MYSQL_PASSWORD: "drupal"
+    volumes:
+      - "./settings/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
+      # - "./database/db.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
     build: .
     ports:
-      - "8585:8080"
+      - "8585:80"
     volumes:
+      - "./settings/php.ini:/usr/local/etc/php/conf.d/min.ini"
       - "./scripts:/scripts"
       - "./workspace:/var/www/html"

@@ -1,0 +1,5 @@
+[mysqld]
+
+default-time-zone = "+04:00"
+key_buffer_size = 32M
+max_allowed_packet = 64M
