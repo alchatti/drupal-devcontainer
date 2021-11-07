@@ -8,22 +8,30 @@ services:
       MYSQL_DATABASE: "drupal"
       MYSQL_USER: "drupal"
       MYSQL_PASSWORD: "drupal"
+      cap_add: "SYS_NICE"
     volumes:
-      - "./settings/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
+      - "./dump:/dump"
+      - "./config/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
       - database:/var/lib/mysql
       # - "./database/db.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
     build: .
     user: "1000:1000"
-    depends_on: db
+    depends_on:
+      - db
     environment:
       APACHE_RUN_USER: "#1000"
       APACHE_RUN_GROUP: "#1000"
+      APACHE_DOCUMENT_ROOT: "/var/www/html/docroot"
     ports:
       - "8585:80"
     volumes:
-      - "./settings/php.ini:/usr/local/etc/php/conf.d/zphp.ini"
+      - "./config/apache:/etc/apache2/sites-available/"
+      - "./config/php.ini:/usr/local/etc/php/conf.d/zphp.ini"
+      - "./dump:/dump"
       - "./scripts:/scripts"
-      - "./workspace:/var/www/html"
+      # - "./workspace:/var/www/html"
+      - webdrive:/var/www/html
 volumes:
   database:
+  webdrive:
