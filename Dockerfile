@@ -7,6 +7,7 @@ FROM mcr.microsoft.com/vscode/devcontainers/php:0-${VARIANT}
 # from https://www.drupal.org/docs/system-requirements/php-requirements
 FROM php:8.0-apache-buster
 
+# START - Based on https://github.com/docker-library/drupal/blob/master/9.2/php8.0/apache-buster/Dockerfile
 # install the PHP extensions we need
 RUN set -eux; \
 	\
@@ -52,26 +53,20 @@ RUN set -eux; \
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	rm -rf /var/lib/apt/lists/*
 
-
-RUN apt-get update && apt-get install unzip
-
-# Change Apache docroot bypass composer vendor folder
-ENV APACHE_DOCUMENT_ROOT=/var/www/html/docroot
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-# RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.con
-
-# Install Composer version 2
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+#END
+
+RUN apt-get update; \
+	apt-get install -y unzip \
+	default-mysql-client;
 
 # Add Drush to path
 ENV PATH "$PATH:/var/www/html/vendor/drush/drush"
 
-# Add `www-data` to group `appuser`
-# RUN addgroup --gid 1000 appuser; \
-# 	adduser --uid 1000 --gid 1000 --disabled-password appuser; \
-# 	adduser www-data appuser;
-
-RUN apt-get install default-mysql-client -y
+# Add Acquia Cli
+ADD https://github.com/acquia/cli/releases/latest/download/acli.phar /usr/bin/acli
+RUN chmod ugo+rx /usr/bin/acli
 
 # Set www-data to have UID 1000
 RUN usermod -u 1000 www-data;
