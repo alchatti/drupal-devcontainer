@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3"
 
 services:
   db:
@@ -9,20 +9,26 @@ services:
       MYSQL_USER: "drupal"
       MYSQL_PASSWORD: "drupal"
       cap_add: "SYS_NICE"
+    ports:
+      - "3306:3306"
     volumes:
       - "./dump:/dump"
       - "./config/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
       - database:/var/lib/mysql
       # - "./database/db.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
-    build: .
-    user: "1000:1000"
+    build:
+      context: .
+      args:
+        VARIANT: 8.0-apache-bullseye
+        NODE_VERSION: 16
+        DART_SASS_VERSION: 1.43.4
+    # network_mode: service:db # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
+    user: vscode # use a non-root user for all processes
     depends_on:
       - db
     environment:
-      APACHE_RUN_USER: "#1000"
-      APACHE_RUN_GROUP: "#1000"
-      APACHE_DOCUMENT_ROOT: "/var/www/html/docroot"
+      APACHE_DOCUMENT_ROOT: "docroot"
     ports:
       - "8585:80"
     volumes:

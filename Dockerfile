@@ -1,11 +1,11 @@
 # Based on https://github.com/docker-library/drupal/blob/master/9.2/php8.0/apache-buster/Dockerfile
-# See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.202.5/containers/php/.devcontainer/base.Dockerfile
+# For list of tags vsist https://mcr.microsoft.com/v2/vscode/devcontainers/php/tags/list
 
-ARG VARIANT="8.0-apache-Buster"
+ARG VARIANT="8.0-apache-bullseye"
 FROM mcr.microsoft.com/vscode/devcontainers/php:0-${VARIANT}
 
 # from https://www.drupal.org/docs/system-requirements/php-requirements
-FROM php:8.0-apache-buster
+# FROM php:${VARIANT}
 
 # START - Based on https://github.com/docker-library/drupal/blob/master/9.2/php8.0/apache-buster/Dockerfile
 # install the PHP extensions we need
@@ -36,7 +36,7 @@ RUN set -eux; \
 	opcache \
 	pdo_mysql \
 	pdo_pgsql \
-	zip \
+	# zip \
 	; \
 	\
 	# reset apt-mark's "manual" list so that "purge --auto-remove" will remove all build dependencies
@@ -61,14 +61,25 @@ RUN apt-get update; \
 	apt-get install -y unzip \
 	default-mysql-client;
 
-# Add Drush to path
+# Add Drush vendor folder to path
 ENV PATH "$PATH:/var/www/html/vendor/drush/drush"
+# ADD https://github.com/drush-ops/drush-launcher/releases/latest/download/drush.phar /usr/bin/drush
+# RUN chmod ugo+rx /usr/bin/drush
 
 # Add Acquia Cli
 ADD https://github.com/acquia/cli/releases/latest/download/acli.phar /usr/bin/acli
 RUN chmod ugo+rx /usr/bin/acli
 
-# Set www-data to have UID 1000
-RUN usermod -u 1000 www-data;
+RUN chown -R vscode:www-data /var/www
 
-RUN chown -R www-data:www-data /var/www
+# [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
+ARG NODE_VERSION="none"
+RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
+
+ARG DART_SASS_VERSION="none"
+RUN if [ "${DART_SASS_VERSION}" != "none" ]; then \
+	wget -P /opt/ https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
+	tar -C /opt/ -xzvf /opt/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
+	rm /opt/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
+	ln -s /opt/dart-sass/sass /usr/bin/sass; \
+	fi;
