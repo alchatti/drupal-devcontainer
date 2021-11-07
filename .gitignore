@@ -104,4 +104,6 @@ dist
 .tern-port
 
 #Ignore Workspace
-workspace/vendor/
+workspace/
+!workspace/.keep
+
