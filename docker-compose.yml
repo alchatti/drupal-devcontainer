@@ -2,7 +2,7 @@ version: "3"
 
 services:
   db:
-    image: mysql:8
+    image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: "drupal"
       MYSQL_DATABASE: "drupal"
@@ -20,15 +20,15 @@ services:
     build:
       context: .
       args:
-        VARIANT: 8.0-apache-bullseye
+        VARIANT: 7.4-apache-bullseye
         NODE_VERSION: 16
         DART_SASS_VERSION: 1.43.4
     # network_mode: service:db # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
     user: vscode # use a non-root user for all processes
     depends_on:
       - db
-    environment:
-      APACHE_DOCUMENT_ROOT: "docroot"
+    # environment:
+    # APACHE_DOCUMENT_ROOT: "web"
     ports:
       - "8585:80"
     volumes:
