@@ -36,7 +36,7 @@ RUN set -eux; \
 	opcache \
 	pdo_mysql \
 	pdo_pgsql \
-	# zip \
+	zip \
 	; \
 	\
 	# reset apt-mark's "manual" list so that "purge --auto-remove" will remove all build dependencies
@@ -61,10 +61,17 @@ RUN apt-get update; \
 	apt-get install -y unzip \
 	default-mysql-client;
 
-# Add Drush vendor folder to path
-ENV PATH "$PATH:/var/www/html/vendor/drush/drush"
-# ADD https://github.com/drush-ops/drush-launcher/releases/latest/download/drush.phar /usr/bin/drush
-# RUN chmod ugo+rx /usr/bin/drush
+# Add Drush Launcher for Global and local Drush
+ADD https://github.com/drush-ops/drush-launcher/releases/latest/download/drush.phar /usr/bin/drush
+RUN chmod ugo+rx /usr/bin/drush
+
+# Install Drush 8.* globally for D6, D7, D8.3-
+# for D8.4+ use Drupal Composer site project with Drush listed as a dependency
+ADD https://github.com/drush-ops/drush/releases/download/8.4.8/drush.phar /opt/drush
+RUN chmod ugo+rx /opt/drush
+
+# Drush Launcher global drush as fallback
+ENV DRUSH_LAUNCHER_FALLBACK=/opt/drush
 
 # Add Acquia Cli
 ADD https://github.com/acquia/cli/releases/latest/download/acli.phar /usr/bin/acli
