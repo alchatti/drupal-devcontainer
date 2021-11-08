@@ -71,7 +71,10 @@ ADD https://github.com/drush-ops/drush/releases/download/8.4.8/drush.phar /opt/d
 RUN chmod ugo+rx /opt/drush
 
 # Drush Launcher global drush as fallback
-ENV DRUSH_LAUNCHER_FALLBACK=/opt/drush
+ENV DRUSH_LAUNCHER_FALLBACK /opt/drush
+
+# APACHE_DOCUMENT_ROOT default value based on Acquia
+ENV APACHE_DOCUMENT_ROOT "docroot"
 
 # Add Acquia Cli
 ADD https://github.com/acquia/cli/releases/latest/download/acli.phar /usr/bin/acli
