@@ -27,15 +27,16 @@ services:
     user: vscode # use a non-root user for all processes
     depends_on:
       - db
-    # environment:
-    # APACHE_DOCUMENT_ROOT: "web"
+    environment:
+      AH_SITE_ENVIRONMENT: "devcontainer" # Acquia Recommendations
     ports:
       - "8585:80"
     volumes:
-      - "./config/apache:/etc/apache2/sites-available/"
-      - "./config/php.ini:/usr/local/etc/php/conf.d/zphp.ini"
+      - "./config/php.ini:/usr/local/etc/php/conf.d/zphp.ini:cached"
       - "./dump:/dump"
       - "./scripts:/scripts"
+      - "./config/settings.local.php:'/var/www/html/docroot/sites/default/settings.local.php"
+      # - "./diag.php:/var/www/html/web/index.php"
       # - "./workspace:/var/www/html"
       - webdrive:/var/www/html
 volumes:
