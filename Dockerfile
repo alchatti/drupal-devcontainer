@@ -57,6 +57,13 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 #END
 
+# ENV Defailts fpr APACHE
+ENV APACHE_DOCUMENT_ROOT "docroot"
+ENV WORKSPACE_ROOT "/var/www/html"
+
+# ENV based Apache Configurations
+RUN sed -ri -e 's!/var/www/html!${WORKSPACE_ROOT}/${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+
 RUN apt-get update; \
 	apt-get install -y unzip \
 	default-mysql-client;
@@ -65,27 +72,25 @@ RUN apt-get update; \
 ADD https://github.com/drush-ops/drush-launcher/releases/latest/download/drush.phar /usr/bin/drush
 RUN chmod ugo+rx /usr/bin/drush
 
+# Drush Launcher global drush as fallback
+ENV DRUSH_LAUNCHER_FALLBACK /opt/drush
+
 # Install Drush 8.* globally for D6, D7, D8.3-
 # for D8.4+ use Drupal Composer site project with Drush listed as a dependency
 ADD https://github.com/drush-ops/drush/releases/download/8.4.8/drush.phar /opt/drush
 RUN chmod ugo+rx /opt/drush
 
-# Drush Launcher global drush as fallback
-ENV DRUSH_LAUNCHER_FALLBACK /opt/drush
-
-# APACHE_DOCUMENT_ROOT default value based on Acquia
-ENV APACHE_DOCUMENT_ROOT "docroot"
-
 # Add Acquia Cli
 ADD https://github.com/acquia/cli/releases/latest/download/acli.phar /usr/bin/acli
 RUN chmod ugo+rx /usr/bin/acli
 
-RUN chown -R vscode:www-data /var/www
+# RUN chown -R vscode:www-data /var/www
 
 # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
 RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
+# [Choice] DART SASS version none, 1.43.4
 ARG DART_SASS_VERSION="none"
 RUN if [ "${DART_SASS_VERSION}" != "none" ]; then \
 	wget -P /opt/ https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
@@ -93,3 +98,4 @@ RUN if [ "${DART_SASS_VERSION}" != "none" ]; then \
 	rm /opt/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
 	ln -s /opt/dart-sass/sass /usr/bin/sass; \
 	fi;
+
