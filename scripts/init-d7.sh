@@ -1,2 +1,2 @@
-drush dl drupal-7 --destination=/var/www/html/ --y
-mv drupal-7.* $APACHE_DOCUMENT_ROOT
+drush dl drupal-7 --destination=./ --y
+mv drupal-* $WORKSPACE_ROOT/$APACHE_DOCUMENT_ROOT
