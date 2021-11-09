@@ -35,7 +35,7 @@ services:
       - "./config/php.ini:/usr/local/etc/php/conf.d/zphp.ini:cached"
       - "./dump:/dump"
       - "./scripts:/scripts"
-      - "./config/settings.local.php:'/var/www/html/docroot/sites/default/settings.local.php"
+      - "./config/settings.local.php:/var/www/html/docroot/sites/default/settings.local.php"
       # - "./diag.php:/var/www/html/web/index.php"
       # - "./workspace:/var/www/html"
       - webdrive:/var/www/html
