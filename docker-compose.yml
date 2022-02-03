@@ -20,7 +20,7 @@ services:
     build:
       context: .
       args:
-        VARIANT: 7.4-apache-bullseye
+        VARIANT: 8.0-apache-bullseye
         NODE_VERSION: 16
         DART_SASS_VERSION: 1.43.4
         ENABLE_SSL: "yes"
@@ -30,14 +30,13 @@ services:
       - db
     environment:
       AH_SITE_ENVIRONMENT: "devcontainer" # Acquia Recommendations
-      APACHE_DOCUMENT_ROOT: "web"
     ports:
       - "8585:80"
     volumes:
       - "./config/php.ini:/usr/local/etc/php/conf.d/zphp.ini:cached"
       - "./dump:/dump"
       - "./scripts:/scripts"
-      - "./config/settings.local.php:/var/www/html/docroot/sites/default/settings.local.php"
+      # - "./config/settings.local.php:/var/www/html/docroot/sites/default/settings.local.php"
       # - "./diag.php:/var/www/html/web/index.php"
       # - "./workspace:/var/www/html"
       - webdrive:/var/www/html
