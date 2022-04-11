@@ -1,7 +1,7 @@
 # Based on https://github.com/docker-library/drupal/blob/master/9.2/php8.0/apache-buster/Dockerfile
 # For list of tags vsist https://mcr.microsoft.com/v2/vscode/devcontainers/php/tags/list
 
-ARG VARIANT="8.0-apache-bullseye"
+ARG VARIANT="8-apache-bullseye"
 FROM mcr.microsoft.com/vscode/devcontainers/php:0-${VARIANT}
 
 # from https://www.drupal.org/docs/system-requirements/php-requirements
