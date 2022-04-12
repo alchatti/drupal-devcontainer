@@ -8,7 +8,13 @@
 	"shutdownAction": "stopCompose",
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
-		"php.validate.executablePath": "/usr/local/bin/php"
+		"php.validate.executablePath": "/usr/local/bin/php",
+		"terminal.integrated.defaultProfile.linux": "zsh",
+		"terminal.integrated.profiles.linux": {
+			"zsh": {
+				"path": "/bin/zsh"
+			},
+		}
 	},
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
@@ -59,7 +65,7 @@
 		3306
 	],
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "apachectl start",
+	"postCreateCommand": "apachectl start && eval $(oh-my-posh init zsh --config ~/.poshthemes/blue-owl.omp.json)",
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
 }

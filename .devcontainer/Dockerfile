@@ -99,3 +99,36 @@ RUN if [ "${DART_SASS_VERSION}" != "none" ]; then \
 	rm /opt/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
 	ln -s /opt/dart-sass/sass /usr/bin/sass; \
 	fi;
+
+# Fish Shell
+# RUN apt-get update && \
+# 	apt-get install --quiet --yes software-properties-common && \
+# 	add-apt-repository --yes ppa:fish-shell/release-3 && \
+# 	apt-get install --quiet --yes fish
+
+# Oh My Posh
+
+ADD https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 /usr/local/bin/oh-my-posh
+ADD https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/themes.zip /tmp/themes.zip
+
+RUN chmod +x /usr/local/bin/oh-my-posh && \
+	unzip /tmp/themes.zip -d /tmp/.poshthemes && \
+	rm /tmp/themes.zip && \
+	chmod u+rw /tmp/.poshthemes/*.json && \
+	chown vscode /tmp/.poshthemes/*.json
+
+USER vscode
+
+RUN mkdir ~/.poshthemes
+RUN cp /tmp/.poshthemes/*.json ~/.poshthemes/
+
+RUN chmod u+rw ~/.poshthemes/*.json && \
+	echo eval "$(oh-my-posh init zsh)" >> ~/.zshrc
+
+
+USER root
+RUN rm -rf /tmp/.poshthemes \
+	&& apt-get autoremove -y \
+	&& apt-get clean -y \
+	&& rm -rf /var/lib/apt/lists/*
+
