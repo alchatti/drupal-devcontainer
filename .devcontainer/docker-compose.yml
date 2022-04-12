@@ -18,7 +18,6 @@ services:
   app:
     image: alchatti/drupal-devcontainer:1
     # network_mode: service:db # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
-    user: vscode # use a non-root user for all processes
     # depends_on:
     #   - db
     environment:
@@ -26,12 +25,13 @@ services:
     # ports:
       # - "8585:80"
     volumes:
-      - "./config/php.ini:/usr/local/etc/php/conf.d/zphp.ini:cached"
-      - "./scripts:/scripts:cached"
-      - "./dump:/dump"
+      - "./scripts:/scripts"
+      - "./config/php.ini:/usr/local/etc/php/conf.d/zphp.ini"
+      - "../.private/.wakatime.cfg:/home/vscode/.wakatime.cfg"
+      - "../dump:/dump"
       # - "./config/settings.local.php:/var/www/html/docroot/sites/default/settings.local.php"
-      # - "../diag.php:/var/www/html/web/index.php"
-      - webdrive:/var/www/html:cached
+      # - "../diag.php:/var/www/html/docroot/index.php"
+      - ../workspace:/var/www/html
     command: sleep infinity
     network_mode: service:db
 volumes:

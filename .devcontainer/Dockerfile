@@ -87,8 +87,6 @@ RUN chmod ugo+rx /opt/drush
 ADD https://github.com/acquia/cli/releases/latest/download/acli.phar /usr/bin/acli
 RUN chmod ugo+rx /usr/bin/acli
 
-# RUN chown -R vscode:www-data /var/www
-
 # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
 RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
@@ -101,4 +99,3 @@ RUN if [ "${DART_SASS_VERSION}" != "none" ]; then \
 	rm /opt/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
 	ln -s /opt/dart-sass/sass /usr/bin/sass; \
 	fi;
-

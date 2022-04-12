@@ -1,10 +1,11 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.202.5/containers/php
 {
-	"name": "Drupal X",
+	"name": "Drupal MC",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
-	"workspaceFolder": "/workspace",
+	"workspaceFolder": "/var/www/html",
+	"shutdownAction": "stopCompose",
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"php.validate.executablePath": "/usr/local/bin/php"
@@ -13,14 +14,52 @@
 	"extensions": [
 		"felixfbecker.php-debug",
 		"bmewburn.vscode-intelephense-client",
-		"mrmlnc.vscode-apache"
+		"xdebug.php-debug",
+		"DotJoshJohnson.xml",
+		"WakaTime.vscode-wakatime",
+		"VisualStudioExptTeam.vscodeintellicode",
+		"rbbit.typescript-hero",
+		"xshrim.txt-syntax",
+		"tsega.drupal-8-twig-snippets",
+		"Gruntfuggly.todo-tree",
+		"cssho.vscode-svgviewer",
+		"richie5um2.vscode-sort-json",
+		"mechatroner.rainbow-csv",
+		"esbenp.prettier-vscode",
+		"christian-kohler.path-intellisense",
+		"christian-kohler.npm-intellisense",
+		"stringham.move-ts",
+		"HookyQR.minify",
+		"DavidAnson.vscode-markdownlint",
+		"bierner.markdown-mermaid",
+		"shd101wyy.markdown-preview-enhanced",
+		"Tyriar.lorem-ipsum",
+		"Zignd.html-css-class-completion",
+		"bradgashler.htmltagwrap",
+		"ecmel.vscode-html-css",
+		"eamodio.gitlens",
+		"GitHub.vscode-pull-request-github",
+		"GitHub.copilot",
+		"mhutchie.git-graph",
+		"rifi2k.format-html-in-php",
+		"marcostazi.VS-code-drupal",
+		"pranaygp.vscode-css-peek",
+		"vivaxy.vscode-conventional-commits",
+		"naumovs.color-highlight",
+		"streetsidesoftware.code-spell-checker",
+		"wmaurer.change-case",
+		"HookyQR.beautify",
+		"michelemelluso.code-beautifier",
+		"ikappas.composer",
+		"mblode.twig-language-2"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
-		8080
+		80,
+		3306
 	],
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "sudo chmod a+x \"$(pwd)/docroot\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)/docroot\" /var/www/html && apache2ctl start",
+	"postCreateCommand": "apachectl start",
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
 }

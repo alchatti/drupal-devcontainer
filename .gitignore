@@ -106,3 +106,5 @@ dist
 #Ignore DB Dump
 dump/*
 !dump/.gitkeep
+
+.private/*
