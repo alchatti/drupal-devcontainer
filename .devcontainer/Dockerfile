@@ -123,8 +123,10 @@ RUN mkdir ~/.poshthemes
 RUN cp /tmp/.poshthemes/*.json ~/.poshthemes/
 
 RUN chmod u+rw ~/.poshthemes/*.json && \
-	echo eval "$(oh-my-posh init zsh)" >> ~/.zshrc
-
+	echo eval "$(oh-my-posh init zsh)" >> ~/.zshrc && \
+	echo "export SHELL=bin/zsh" >> ~/.bashrc && \
+	echo "exec /bin/zsh -l" >> ~/.bashrc
+## NOTE: Add the zsh theme here
 
 USER root
 RUN rm -rf /tmp/.poshthemes \
