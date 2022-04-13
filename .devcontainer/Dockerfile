@@ -124,8 +124,10 @@ RUN cp /tmp/.poshthemes/*.json ~/.poshthemes/
 
 RUN chmod u+rw ~/.poshthemes/*.json && \
 	echo eval "$(oh-my-posh init zsh)" >> ~/.zshrc && \
-	echo "export SHELL=bin/zsh" >> ~/.bashrc && \
-	echo "exec /bin/zsh -l" >> ~/.bashrc
+	sed -ri -e 's!/home/vscode/7.61.0.omp.json!/home/vscode/.poshthemes/$POSH_THEME_ENVIRONMENT.omp.json!g' ~/.zshrc && \
+	# sed -i 's/7.61.0.omp.json/.poshthemes\/$POSH_THEME_ENVIRONMENT.omp.json/' ~/.zshrc && \
+	echo "export SHELL=bin/$SHELL_ENVIRONMENT" >> ~/.bashrc && \
+	echo "exec /bin/$SHELL_ENVIRONMENT"  >> ~/.bashrc
 ## NOTE: Add the zsh theme here
 
 USER root

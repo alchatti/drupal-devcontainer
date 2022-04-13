@@ -65,7 +65,11 @@
 		3306
 	],
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "apachectl start && eval $(oh-my-posh init zsh --config ~/.poshthemes/blue-owl.omp.json)",
+	"postCreateCommand": "apachectl start",
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "vscode"
+	"remoteUser": "vscode",
+	"remoteEnv": {
+		"SHELL_ENVIRONMENT": "zsh",
+		"POSH_THEME_ENVIRONMENT": "blue-owl",
+	},
 }
