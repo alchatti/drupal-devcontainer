@@ -17,23 +17,16 @@ services:
       # - "./database/db.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
     image: alchatti/drupal-devcontainer:1
-    # network_mode: service:db # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
-    # depends_on:
-    #   - db
+    network_mode: service:db
     environment:
       AH_SITE_ENVIRONMENT: "devcontainer" # Acquia Recommendations
-    # ports:
-      # - "8585:80"
     volumes:
       - "./scripts:/scripts"
       - "./config/php.ini:/usr/local/etc/php/conf.d/zphp.ini"
       - "../.private/.wakatime.cfg:/home/vscode/.wakatime.cfg"
       - "../dump:/dump"
-      # - "./config/settings.local.php:/var/www/html/docroot/sites/default/settings.local.php"
-      # - "../diag.php:/var/www/html/docroot/index.php"
-      - ../workspace:/var/www/html
+      - "../workspace:/var/www/html"
     command: sleep infinity
-    network_mode: service:db
 volumes:
   database:
   webdrive:

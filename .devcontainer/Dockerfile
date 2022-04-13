@@ -2,13 +2,7 @@
 # For list of tags vsist https://mcr.microsoft.com/v2/vscode/devcontainers/php/tags/list
 
 ARG VARIANT
-ARG NODE_VERSION
-ARG DART_SASS_VERSION
-ARG ENABLE_SSL
 FROM mcr.microsoft.com/vscode/devcontainers/php:0-${VARIANT}
-
-# from https://www.drupal.org/docs/system-requirements/php-requirements
-# FROM php:${VARIANT}
 
 # START - Based on https://github.com/docker-library/drupal/blob/master/9.2/php8.0/apache-buster/Dockerfile
 # install the PHP extensions we need
@@ -100,39 +94,30 @@ RUN if [ "${DART_SASS_VERSION}" != "none" ]; then \
 	ln -s /opt/dart-sass/sass /usr/bin/sass; \
 	fi;
 
-# Fish Shell
-# RUN apt-get update && \
-# 	apt-get install --quiet --yes software-properties-common && \
-# 	add-apt-repository --yes ppa:fish-shell/release-3 && \
-# 	apt-get install --quiet --yes fish
-
 # Oh My Posh
-
 ADD https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 /usr/local/bin/oh-my-posh
-ADD https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/themes.zip /tmp/themes.zip
+ADD https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/themes.zip /opt/themes.zip
 
 RUN chmod +x /usr/local/bin/oh-my-posh && \
-	unzip /tmp/themes.zip -d /tmp/.poshthemes && \
-	rm /tmp/themes.zip && \
-	chmod u+rw /tmp/.poshthemes/*.json && \
-	chown vscode /tmp/.poshthemes/*.json
+	unzip /opt/themes.zip -d /opt/.poshthemes && \
+	rm /opt/themes.zip && \
+	chmod o+r /opt/.poshthemes/*.json
 
-USER vscode
-
-RUN mkdir ~/.poshthemes
-RUN cp /tmp/.poshthemes/*.json ~/.poshthemes/
-
-RUN chmod u+rw ~/.poshthemes/*.json && \
-	echo eval "$(oh-my-posh init zsh)" >> ~/.zshrc && \
-	sed -ri -e 's!/home/vscode/7.61.0.omp.json!/home/vscode/.poshthemes/$POSH_THEME_ENVIRONMENT.omp.json!g' ~/.zshrc && \
-	# sed -i 's/7.61.0.omp.json/.poshthemes\/$POSH_THEME_ENVIRONMENT.omp.json/' ~/.zshrc && \
-	echo "export SHELL=bin/$SHELL_ENVIRONMENT" >> ~/.bashrc && \
-	echo "exec /bin/$SHELL_ENVIRONMENT"  >> ~/.bashrc
-## NOTE: Add the zsh theme here
-
-USER root
-RUN rm -rf /tmp/.poshthemes \
+# PowerShell
+ADD https://github.com/PowerShell/PowerShell/releases/download/v7.2.2/powershell-lts_7.2.2-1.deb_amd64.deb /tmp/powershell.deb
+RUN dpkg -i /tmp/powershell.deb && \
+	apt-get install -f -y \
 	&& apt-get autoremove -y \
 	&& apt-get clean -y \
 	&& rm -rf /var/lib/apt/lists/*
 
+RUN pwsh -c "Install-Module \"posh-git\",\"posh-sshell\", \"Terminal-Icons\" -scope AllUsers -Force"
+
+COPY ./.build/powershell_profile.ps1 /opt/microsoft/powershell/7-lts/profile.ps1
+RUN chmod o+r /opt/microsoft/powershell/7-lts/profile.ps1
+
+USER vscode
+
+RUN echo eval "$(oh-my-posh init zsh)" >> ~/.zshrc && \
+	sed -ri -e 's!/home/vscode/7.61.0.omp.json!/opt/.poshthemes/$POSH_THEME_ENVIRONMENT.omp.json!g' ~/.zshrc && \
+	echo "exec \$SHELL -l"  >> ~/.bashrc

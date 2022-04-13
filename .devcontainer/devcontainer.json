@@ -9,11 +9,14 @@
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"php.validate.executablePath": "/usr/local/bin/php",
-		"terminal.integrated.defaultProfile.linux": "zsh",
+		"terminal.integrated.defaultProfile.linux": "pwsh",
 		"terminal.integrated.profiles.linux": {
 			"zsh": {
 				"path": "/bin/zsh"
 			},
+			"pwsh": {
+				"path": "/usr/bin/pwsh"
+			}
 		}
 	},
 	// Add the IDs of extensions you want installed when the container is created.
@@ -64,12 +67,11 @@
 		80,
 		3306
 	],
-	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "apachectl start",
+	"postStartCommand": "apachectl start",
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
 	"remoteEnv": {
-		"SHELL_ENVIRONMENT": "zsh",
+		"SHELL": "/bin/zsh",
 		"POSH_THEME_ENVIRONMENT": "blue-owl",
 	},
 }

@@ -108,3 +108,4 @@ dump/*
 !dump/.gitkeep
 
 .private/*
+!dump/.gitkeep
