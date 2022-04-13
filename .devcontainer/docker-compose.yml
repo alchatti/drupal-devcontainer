@@ -16,7 +16,7 @@ services:
       - database:/var/lib/mysql
       # - "./database/db.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
-    image: alchatti/drupal-devcontainer:1
+    image: alchatti/drupal-devcontainer:latest
     network_mode: service:db
     environment:
       AH_SITE_ENVIRONMENT: "devcontainer" # Acquia Recommendations
