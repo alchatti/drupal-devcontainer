@@ -8,6 +8,7 @@
 	"shutdownAction": "stopCompose",
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
+		"files.eol": "\n",
 		"php.validate.executablePath": "/usr/local/bin/php",
 		"terminal.integrated.defaultProfile.linux": "pwsh",
 		"terminal.integrated.profiles.linux": {
@@ -67,6 +68,7 @@
 		80,
 		3306
 	],
+	"postCreateCommand": "/init.sh",
 	"postStartCommand": "apachectl start",
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",

@@ -65,6 +65,10 @@ RUN apt-get update; \
 	apt-get install -y unzip \
 	default-mysql-client;
 
+# Init Script
+COPY ./.build/init.sh /init.sh
+RUN chmod o+xr /init.sh
+
 # Add Drush Launcher for Global and local Drush
 ADD https://github.com/drush-ops/drush-launcher/releases/latest/download/drush.phar /usr/bin/drush
 RUN chmod ugo+rx /usr/bin/drush

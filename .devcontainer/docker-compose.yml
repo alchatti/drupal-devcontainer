@@ -21,12 +21,13 @@ services:
     environment:
       AH_SITE_ENVIRONMENT: "devcontainer" # Acquia Recommendations
     volumes:
-      - "./scripts:/scripts"
       - "./config/php.ini:/usr/local/etc/php/conf.d/zphp.ini"
       - "../.private/.wakatime.cfg:/home/vscode/.wakatime.cfg"
+      - "../scripts:/scripts"
       - "../dump:/dump"
-      - "../workspace:/var/www/html"
+      # - "../workspace:/var/www/html"
+      - "workspace:/var/www/html"
     command: sleep infinity
 volumes:
   database:
-  webdrive:
+  workspace:
