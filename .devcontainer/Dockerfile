@@ -81,19 +81,6 @@ RUN chmod ugo+rx /opt/drush
 ADD https://github.com/acquia/cli/releases/latest/download/acli.phar /usr/bin/acli
 RUN chmod ugo+rx /usr/bin/acli
 
-# [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
-ARG NODE_VERSION="none"
-RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
-
-# [Choice] DART SASS version none, 1.43.4
-ARG DART_SASS_VERSION="none"
-RUN if [ "${DART_SASS_VERSION}" != "none" ]; then \
-	wget -P /opt/ https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
-	tar -C /opt/ -xzvf /opt/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
-	rm /opt/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
-	ln -s /opt/dart-sass/sass /usr/bin/sass; \
-	fi;
-
 # Oh My Posh
 ADD https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 /usr/local/bin/oh-my-posh
 ADD https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/themes.zip /opt/themes.zip
@@ -111,13 +98,30 @@ RUN dpkg -i /tmp/powershell.deb && \
 	&& apt-get clean -y \
 	&& rm -rf /var/lib/apt/lists/*
 
-RUN pwsh -c "Install-Module \"posh-git\",\"posh-sshell\", \"Terminal-Icons\" -scope AllUsers -Force"
+RUN pwsh -c "Install-Module \"posh-git\",\"PSReadLine\",\"Terminal-Icons\",\"posh-sshell\" -scope AllUsers -Force"
 
 COPY ./.build/powershell_profile.ps1 /opt/microsoft/powershell/7-lts/profile.ps1
 RUN chmod o+r /opt/microsoft/powershell/7-lts/profile.ps1
 
 USER vscode
 
-RUN echo eval "$(oh-my-posh init zsh)" >> ~/.zshrc && \
-	sed -ri -e 's!/home/vscode/7.61.0.omp.json!/opt/.poshthemes/$POSH_THEME_ENVIRONMENT.omp.json!g' ~/.zshrc && \
+RUN echo "$(oh-my-posh init zsh)" >> ~/.zshrc && \
+	sed -ri -e 's!POSH_THEME="/home/vscode/.*.omp.json"!POSH_THEME="/opt/.poshthemes/$POSH_THEME_ENVIRONMENT.omp.json"!g' ~/.zshrc && \
 	echo "exec \$SHELL -l"  >> ~/.bashrc
+
+USER root
+
+# [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
+ARG NODE_VERSION="none"
+RUN if [ "${NODE_VERSION}" != "none" ] &&  [ "${NODE_VERSION}" != "" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
+
+# [Choice] DART SASS version none, 1.43.4
+ARG DART_SASS_VERSION="none"
+RUN if [ "${DART_SASS_VERSION}" != "none" ] && [ "${DART_SASS_VERSION}" != "" ]; then \
+	wget -P /opt/ https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
+	tar -C /opt/ -xzvf /opt/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
+	rm /opt/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz && \
+	ln -s /opt/dart-sass/sass /usr/bin/sass; \
+	fi;
+
+RUN rm -r /tmp/*
