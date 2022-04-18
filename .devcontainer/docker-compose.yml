@@ -11,8 +11,7 @@ services:
       MYSQL_PASSWORD: "drupal"
       cap_add: "SYS_NICE"
     volumes:
-      # - "./dump:/dump"
-      # - "./config/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
+      - "../config/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
       - database:/var/lib/mysql
       # - "./database/db.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
@@ -21,7 +20,7 @@ services:
     environment:
       AH_SITE_ENVIRONMENT: "devcontainer" # Acquia Recommendations
     volumes:
-      - "./config/php.ini:/usr/local/etc/php/conf.d/zphp.ini"
+      - "../config/php.ini:/usr/local/etc/php/conf.d/zphp.ini"
       - "../.private/.wakatime.cfg:/home/vscode/.wakatime.cfg"
       - "../scripts:/scripts"
       - "../dump:/dump"
