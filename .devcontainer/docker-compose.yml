@@ -4,11 +4,9 @@ services:
   db:
     image: mysql:5.7
     restart: unless-stopped
+    env_file:
+      - "../devcontainer.env"
     environment:
-      MYSQL_ROOT_PASSWORD: "drupal"
-      MYSQL_DATABASE: "drupal"
-      MYSQL_USER: "drupal"
-      MYSQL_PASSWORD: "drupal"
       cap_add: "SYS_NICE"
     volumes:
       - "../config/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
@@ -17,10 +15,13 @@ services:
   app:
     image: alchatti/drupal-devcontainer:latest
     network_mode: service:db
+    env_file:
+      - "../devcontainer.env"
     environment:
-      AH_SITE_ENVIRONMENT: "devcontainer" # Acquia Recommendations
+      AH_SITE_ENVIRONMENT: "dev" # Acquia Recommendations
     volumes:
       - "../config/php.ini:/usr/local/etc/php/conf.d/zphp.ini"
+      - "../settings.local.php:/var/www/settings.local.php"
       - "../.private/.wakatime.cfg:/home/vscode/.wakatime.cfg"
       - "../scripts:/scripts"
       - "../dump:/dump"
