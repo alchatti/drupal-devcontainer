@@ -35,5 +35,5 @@ do
   --build-arg VARIANT=$phpver \
   --build-arg NODE_VERSION=$NODE \
   --build-arg DART_SASS_VERSION=$SASS \
-  -t alchatti/drupal-devcontainer:p$phpver-n$NODE-s$SASS -t alchatti/drupal-devcontainer:$phpver-latest .
+  -t alchatti/drupal-devcontainer:$phpver-n$NODE-s$SASS -t alchatti/drupal-devcontainer:$phpver-latest .
 done
