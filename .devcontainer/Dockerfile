@@ -116,14 +116,13 @@ RUN echo "$(oh-my-posh init zsh)" >> ~/.zshrc && \
 # Drupal Coder and phpcs Requirements
 # version is specified due to bug https://www.drupal.org/project/coder/issues/3262291
 RUN composer global require drupal/coder 8.3.13
-RUN sudo ln -s ~/.composer/vendor/bin/phpcs /usr/bin/phpcs
-RUN phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
+RUN ~/.composer/vendor/bin/phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
 
 USER root
 
 # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
-RUN if [ "${NODE_VERSION}" != "none" ] &&  [ "${NODE_VERSION}" != "" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; npm install -g pnpm; fi
+RUN if [ "${NODE_VERSION}" != "none" ] &&  [ "${NODE_VERSION}" != "" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1 && npm install -g pnpm"; fi
 
 # [Choice] DART SASS version none, 1.43.4
 ARG DART_SASS_VERSION="none"

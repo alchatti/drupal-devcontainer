@@ -29,9 +29,9 @@ services:
       - "pnpm-store:/home/vscode/.pnpm-store/"
       - "workspace:/var/www/html"
     command: sleep infinity
+    user: "1000:1000"
 volumes:
   database:
   # create using cli docker volume create pnpm-store
   pnpm-store:
-    external: true
   workspace:
