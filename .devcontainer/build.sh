@@ -18,7 +18,7 @@ done
 
 if [ -z "$PHP" ]
 then
-  PHP=("8.1-apache-bullseye" "7.4-apache-bullseye")
+  PHP=("8.1" "7.4")
   echo "No version setting PHP to defaults"
 else
   PHP=($PHP);
@@ -32,7 +32,7 @@ for phpver in ${PHP[@]}
 do
   printf "\nBuilding image with \n - PHP $phpver \n - NodeJs $NODE \n - dart-sass $SASS \n\n"
   docker build \
-  --build-arg VARIANT=$phpver \
+  --build-arg VARIANT=$phpver-apache-bullseye \
   --build-arg NODE_VERSION=$NODE \
   --build-arg DART_SASS_VERSION=$SASS \
   -t alchatti/drupal-devcontainer:$phpver-n$NODE-s$SASS -t alchatti/drupal-devcontainer:$phpver-latest .
