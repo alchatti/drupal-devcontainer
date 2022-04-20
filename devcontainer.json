@@ -1,129 +1,137 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.202.5/containers/php
 {
-	"name": "Drupal MC",
-	"dockerComposeFile": "docker-compose.yml",
-	"service": "app",
-	"workspaceFolder": "/var/www/html",
-	"shutdownAction": "stopCompose",
-	// Set *default* container specific settings.json values on container create.
-	"settings": {
-		"files.eol": "\n",
-		"php.validate.executablePath": "/usr/local/bin/php",
-		"terminal.integrated.defaultProfile.linux": "pwsh",
-		"terminal.integrated.profiles.linux": {
-			"zsh": {
-				"path": "/bin/zsh"
-			},
-			"pwsh": {
-				"path": "/usr/bin/pwsh"
-			}
-		},
-		"css.validate": true,
-		"diffEditor.ignoreTrimWhitespace": false,
-		"editor.tabSize": 2,
-		"editor.autoIndent": "full",
-		"editor.insertSpaces": true,
-		"editor.formatOnPaste": true,
-		"editor.renderWhitespace": "boundary",
-		"editor.wordWrapColumn": 80,
-		"editor.wordWrap": "off",
-		"editor.detectIndentation": true,
-		"editor.rulers": [
-			80
-		],
-		"files.associations": {
-			"*.inc": "php",
-			"*.module": "php",
-			"*.install": "php",
-			"*.theme": "php",
-			"*.profile": "php",
-			"*.tpl.php": "php",
-			"*.test": "php",
-			"*.php": "php",
-			"*.info": "ini",
-			"*.html": "twig",
-		},
-		"emmet.includeLanguages": {
-			"twig": "html"
-		},
-		"files.trimTrailingWhitespace": true,
-		"files.insertFinalNewline": true,
-		"html.format.enable": true,
-		"html.format.wrapLineLength": 80,
-		/* Empty Indent */
-		"emptyIndent.removeIndent": true,
-		"emptyIndent.highlightIndent": false,
-		"emptyIndent.highlightColor": "rgba(246,36,89,0.6)",
-		/* Disable for Drupal 7 */
-		"phpcs.enable": true,
-		"phpcs.standard": "Drupal,DrupalPractice",
-		/* END Disable for Drupal 7 */
-		"php.validate.enable": true,
-		"php.validate.run": "onType",
-		"php.suggest.basic": false,
-		"intelephense.environment.documentRoot": "core/index.php",
-		"intelephense.format.braces": "k&r",
-		"php-docblocker.gap": true,
-		"php-docblocker.useShortNames": true,
-	},
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"felixfbecker.php-debug",
-		"bmewburn.vscode-intelephense-client",
-		"xdebug.php-debug",
-		"DotJoshJohnson.xml",
-		"WakaTime.vscode-wakatime",
-		"VisualStudioExptTeam.vscodeintellicode",
-		"rbbit.typescript-hero",
-		"xshrim.txt-syntax",
-		"tsega.drupal-8-twig-snippets",
-		"Gruntfuggly.todo-tree",
-		"cssho.vscode-svgviewer",
-		"richie5um2.vscode-sort-json",
-		"mechatroner.rainbow-csv",
-		"esbenp.prettier-vscode",
-		"christian-kohler.path-intellisense",
-		"christian-kohler.npm-intellisense",
-		"stringham.move-ts",
-		"HookyQR.minify",
-		"DavidAnson.vscode-markdownlint",
-		"bierner.markdown-mermaid",
-		"shd101wyy.markdown-preview-enhanced",
-		"Tyriar.lorem-ipsum",
-		"Zignd.html-css-class-completion",
-		"bradgashler.htmltagwrap",
-		"ecmel.vscode-html-css",
-		"eamodio.gitlens",
-		"GitHub.vscode-pull-request-github",
-		"GitHub.copilot",
-		"mhutchie.git-graph",
-		"rifi2k.format-html-in-php",
-		"marcostazi.VS-code-drupal",
-		"pranaygp.vscode-css-peek",
-		"vivaxy.vscode-conventional-commits",
-		"naumovs.color-highlight",
-		"streetsidesoftware.code-spell-checker",
-		"wmaurer.change-case",
-		"HookyQR.beautify",
-		"michelemelluso.code-beautifier",
-		"ikappas.composer",
-		"mblode.twig-language-2",
-		"ikappas.phpcs",
-		"neilbrayfield.php-docblocker",
-		"DmitryDorofeev.empty-indent"
-	],
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [
-		80,
-		3306
-	],
-	"postCreateCommand": "/init.sh",
-	"postStartCommand": "apachectl start",
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "vscode",
-	"remoteEnv": {
-		"SHELL": "/bin/zsh",
-		"POSH_THEME_ENVIRONMENT": "blue-owl",
-	},
+  "name": "Drupal MC",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/var/www/html",
+  "shutdownAction": "stopCompose",
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+    "files.eol": "\n",
+    "php.validate.executablePath": "/usr/local/bin/php",
+    "terminal.integrated.defaultProfile.linux": "pwsh",
+    "terminal.integrated.profiles.linux": {
+      "zsh": {
+        "path": "/bin/zsh"
+      },
+      "pwsh": {
+        "path": "/usr/bin/pwsh"
+      }
+    },
+    "css.validate": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "full",
+    "editor.insertSpaces": true,
+    "editor.formatOnPaste": true,
+    "editor.renderWhitespace": "boundary",
+    "editor.wordWrapColumn": 80,
+    "editor.wordWrap": "off",
+    "editor.detectIndentation": true,
+    "editor.rulers": [
+      80
+    ],
+    "files.associations": {
+      "*.inc": "php",
+      "*.module": "php",
+      "*.install": "php",
+      "*.theme": "php",
+      "*.profile": "php",
+      "*.tpl.php": "php",
+      "*.test": "php",
+      "*.php": "php",
+      "*.info": "ini",
+      "*.html": "twig",
+    },
+    "emmet.includeLanguages": {
+      "twig": "html"
+    },
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "html.format.enable": true,
+    "html.format.wrapLineLength": 80,
+    /* Empty Indent */
+    "emptyIndent.removeIndent": true,
+    "emptyIndent.highlightIndent": false,
+    "emptyIndent.highlightColor": "rgba(246,36,89,0.6)",
+    /* Disable for Drupal 7 */
+    "phpcs.enable": true,
+    "phpcs.standard": "Drupal,DrupalPractice",
+    /* END Disable for Drupal 7 */
+    "php.validate.enable": true,
+    "php.validate.run": "onType",
+    "php.suggest.basic": false,
+    "intelephense.environment.documentRoot": "core/index.php",
+    "intelephense.format.braces": "k&r",
+    "php-docblocker.gap": true,
+    "php-docblocker.useShortNames": true,
+    "workbench.colorCustomizations": {
+      "sash.hoverBorder": "#0897ef",
+      "titleBar.activeBackground": "#0678be",
+      "titleBar.activeForeground": "#e7e7e7",
+      "titleBar.inactiveBackground": "#0678be99",
+      "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.remoteColor": "#0678be"
+  },
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    "felixfbecker.php-debug",
+    "bmewburn.vscode-intelephense-client",
+    "xdebug.php-debug",
+    "DotJoshJohnson.xml",
+    "WakaTime.vscode-wakatime",
+    "VisualStudioExptTeam.vscodeintellicode",
+    "rbbit.typescript-hero",
+    "xshrim.txt-syntax",
+    "tsega.drupal-8-twig-snippets",
+    "Gruntfuggly.todo-tree",
+    "cssho.vscode-svgviewer",
+    "richie5um2.vscode-sort-json",
+    "mechatroner.rainbow-csv",
+    "esbenp.prettier-vscode",
+    "christian-kohler.path-intellisense",
+    "christian-kohler.npm-intellisense",
+    "stringham.move-ts",
+    "HookyQR.minify",
+    "DavidAnson.vscode-markdownlint",
+    "bierner.markdown-mermaid",
+    "shd101wyy.markdown-preview-enhanced",
+    "Tyriar.lorem-ipsum",
+    "Zignd.html-css-class-completion",
+    "bradgashler.htmltagwrap",
+    "ecmel.vscode-html-css",
+    "eamodio.gitlens",
+    "GitHub.vscode-pull-request-github",
+    "GitHub.copilot",
+    "mhutchie.git-graph",
+    "rifi2k.format-html-in-php",
+    "marcostazi.VS-code-drupal",
+    "pranaygp.vscode-css-peek",
+    "vivaxy.vscode-conventional-commits",
+    "naumovs.color-highlight",
+    "streetsidesoftware.code-spell-checker",
+    "wmaurer.change-case",
+    "HookyQR.beautify",
+    "michelemelluso.code-beautifier",
+    "ikappas.composer",
+    "mblode.twig-language-2",
+    "ikappas.phpcs",
+    "neilbrayfield.php-docblocker",
+    "DmitryDorofeev.empty-indent"
+  ],
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [
+    80,
+    3306
+  ],
+  "postCreateCommand": "/init.sh",
+  "postStartCommand": "apachectl start",
+  // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+  "remoteUser": "vscode",
+  "remoteEnv": {
+    "SHELL": "/bin/zsh",
+    "POSH_THEME_ENVIRONMENT": "blue-owl",
+  },
 }
