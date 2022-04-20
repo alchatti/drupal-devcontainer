@@ -20,13 +20,13 @@ services:
     environment:
       AH_SITE_ENVIRONMENT: "dev" # Acquia Recommendations
     volumes:
-      - "config/php.ini:/usr/local/etc/php/conf.d/zphp.ini:ro"
-      - "../settings.local.php:/var/www/settings.local.php"
       - "~/.wakatime.cfg:/home/vscode/.wakatime.cfg:ro"
+      - "config/php.ini:/usr/local/etc/php/conf.d/zphp.ini:ro"
+      - "config/settings.local.php:/var/www/settings.local.php"
+      - "pnpm-store:/home/vscode/.pnpm-store/"
       - "../dump:/dump"
       - "../:/var/www/html"
       # - "workspace:/var/www/html"
-      - "pnpm-store:/home/vscode/.pnpm-store/"
     command: sleep infinity
 volumes:
   database:
