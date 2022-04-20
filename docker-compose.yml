@@ -24,7 +24,7 @@ services:
       - "./config/php.ini:/usr/local/etc/php/conf.d/zphp.ini:ro"
       - "./config/settings.local.php:/var/www/settings.local.php"
       - "pnpm-store:/home/vscode/.pnpm-store/"
-      # - "../dump:/dump"
+      - "../dump:/dump"
       - "..:/var/www/html"
       # - "workspace:/var/www/html"
     command: sleep infinity
