@@ -5,27 +5,27 @@ services:
     image: mysql:5.7
     restart: unless-stopped
     env_file:
-      - "devcontainer.env"
+      - "./devcontainer.env"
     environment:
       cap_add: "SYS_NICE"
     volumes:
-      - "config/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
+      - "./config/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
       - database:/var/lib/mysql
       # - "./database/db.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
     image: alchatti/drupal-devcontainer:8.1-latest
     network_mode: service:db
     env_file:
-      - "devcontainer.env"
+      - "./devcontainer.env"
     environment:
       AH_SITE_ENVIRONMENT: "dev" # Acquia Recommendations
     volumes:
       - "~/.wakatime.cfg:/home/vscode/.wakatime.cfg:ro"
-      - "config/php.ini:/usr/local/etc/php/conf.d/zphp.ini:ro"
-      - "config/settings.local.php:/var/www/settings.local.php"
+      - "./config/php.ini:/usr/local/etc/php/conf.d/zphp.ini:ro"
+      - "./config/settings.local.php:/var/www/settings.local.php"
       - "pnpm-store:/home/vscode/.pnpm-store/"
-      - "../dump:/dump"
-      - "../:/var/www/html"
+      # - "../dump:/dump"
+      - "..:/var/www/html"
       # - "workspace:/var/www/html"
     command: sleep infinity
 volumes:
