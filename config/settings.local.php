@@ -4,10 +4,21 @@
  * @file
  * Local development override configuration feature.
  *
- * To activate this file, copy the following code to the end of your settings.php
- ** if (file_exists('/var/www/settings.local.php')) { require('/var/www/settings.local.php'); }
+ * To activate this file, copy the following code to the end of your
+ * settings.php.
+ * # if (file_exists('/var/www/settings.local.php')) {
+ * # require('/var/www/settings.local.php');
+ * # }
  */
+
+$settings['skip_permissions_hardening'] = TRUE;
+
+$settings['trusted_host_patterns'] = [
+  'localhost',
+];
+
 $base_url = 'http://localhost';
+
 $options['uri'] = 'http://localhost';
 $databases['default']['default'] = array(
   'database' => $_ENV['MYSQL_DATABASE'],
