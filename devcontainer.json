@@ -201,7 +201,8 @@
     "mblode.twig-language-2",
     "ikappas.phpcs",
     "neilbrayfield.php-docblocker",
-    "DmitryDorofeev.empty-indent"
+    "DmitryDorofeev.empty-indent",
+    "eamodio.toggle-excluded-files"
   ],
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [
