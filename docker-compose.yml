@@ -11,14 +11,14 @@ services:
     volumes:
       - "./config/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
       - database:/var/lib/mysql
-      # - "./database/db.sql:/docker-entrypoint-initdb.d/mydb.sql"
+      # - "../dump/init.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
     image: alchatti/drupal-devcontainer:8.1-latest
     network_mode: service:db
     env_file:
       - "./devcontainer.env"
     environment:
-      AH_SITE_ENVIRONMENT: "dev" # Acquia Recommendations
+      AH_SITE_ENVIRONMENT: "dev" # Acquia Enviroment
     volumes:
       - "~/.wakatime.cfg:/home/vscode/.wakatime.cfg:ro"
       - "./config/php.ini:/usr/local/etc/php/conf.d/zphp.ini:ro"
@@ -26,11 +26,9 @@ services:
       - "pnpm-store:/home/vscode/.pnpm-store/"
       - "../dump:/dump"
       - "..:/var/www/html"
-      # - "workspace:/var/www/html"
     command: sleep infinity
 volumes:
   database:
-  # workspace:
   # create using cli > docker volume create pnpm-store
   pnpm-store:
     external: true
