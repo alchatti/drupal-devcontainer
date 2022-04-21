@@ -1,4 +1,5 @@
-# Based on https://github.com/docker-library/drupal/blob/master/9.2/php8.0/apache-buster/Dockerfile
+# Based on https://github.com/docker-library/drupal/blob/master/9.2/php8.0/apache-bullseye/Dockerfile file
+# Uses mcr.microsoft.com/vscode/devcontainers/php as base image
 # For list of tags vsist https://mcr.microsoft.com/v2/vscode/devcontainers/php/tags/list
 
 ARG VARIANT
