@@ -17,7 +17,7 @@ then
 	sed -i'.original' 's/web\//docroot\//g' composer.json && rm composer.json.original
 
 	# composer require drush/drush:^10.2 drupal/mysql56 --no-update
-	composer require --no-update drush/drush:^10.2
+	composer require --no-update drush/drush:^11
 
 	mv /tmp/drupal/* $WORKSPACE_ROOT
 	rm /tmp/drupal -rf
