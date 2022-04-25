@@ -86,6 +86,10 @@ RUN chmod ugo+rx /opt/drush
 ADD https://github.com/acquia/cli/releases/latest/download/acli.phar /usr/bin/acli
 RUN chmod ugo+rx /usr/bin/acli
 
+# Acquia BLT Launcher
+ADD https://github.com/acquia/blt-launcher/releases/latest/download/blt.phar /usr/bin/blt
+RUN chmod ugo+rx /usr/bin/blt
+
 # Oh My Posh
 ADD https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 /usr/local/bin/oh-my-posh
 ADD https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/themes.zip /opt/themes.zip
