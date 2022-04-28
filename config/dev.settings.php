@@ -4,15 +4,16 @@
  * @file
  * Local development override configuration feature.
  *
+ *
  * To activate this file, copy the following code to the end of your
  * settings.php.
- * # if (file_exists($app_root . '/' . $site_path . '/settings.local.php')
- * #     && file_exists('/var/www/settings.local.php')) {
- * #   include $app_root . '/' . $site_path . '/settings.local.php';
+ * # if (file_exists($app_root . '/' . $site_path . '/settings/local.settings.php')
+ * #     && file_exists('/var/www/dev.settings.php')) {
+ * #   include $app_root . '/' . $site_path . '/settings/local.settings.php';
  * #  }
  *
- * Replace DB settings inside settings.local.php with
- * # require('/var/www/settings.local.php');
+ * Replace DB settings inside `/settings/local.settings.php` with
+ * # require('/var/www/dev.settings.php');
  */
 
 $db_name = $_ENV['MYSQL_DATABASE'];

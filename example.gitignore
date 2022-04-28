@@ -4,14 +4,15 @@
 composer.phar
 /vendor/
 /docroot/*.*
+!/docroot/.htaccess
 /docroot/core/
 /docroot/modules/contrib/
 /docroot/themes/contrib/
 /docroot/profiles/contrib/
 
 # Ignore configuration files that may contain sensitive information.
-/docroot/sites/*/settings*.php
-/docroot/sites/*/services*.yml
+!/docroot/sites/*/settings*.php
+!/docroot/sites/*/services*.yml
 
 # Ignore paths that contain user-generated content.
 /docroot/sites/*/files
