@@ -22,7 +22,7 @@ services:
     volumes:
       - "~/.wakatime.cfg:/home/vscode/.wakatime.cfg:ro"
       - "./config/php.ini:/usr/local/etc/php/conf.d/zphp.ini:ro"
-      - "./config/settings.local.php:/var/www/settings.local.php"
+      - "./config/dev.settings.php:/var/www/dev.settings.php"
       - "pnpm-store:/home/vscode/.pnpm-store/"
       - "../dump:/dump"
       - "..:/var/www/html"
