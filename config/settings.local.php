@@ -6,20 +6,17 @@
  *
  * To activate this file, copy the following code to the end of your
  * settings.php.
- * # if (file_exists('/var/www/settings.local.php')) {
+ * # if (file_exists($app_root . '/' . $site_path . '/settings.local.php')
+ * #     && file_exists('/var/www/settings.local.php')) {
+ * #   include $app_root . '/' . $site_path . '/settings.local.php';
+ * #  }
+ *
+ * Replace DB settings inside settings.local.php with
  * # require('/var/www/settings.local.php');
- * # }
  */
 
-$settings['skip_permissions_hardening'] = TRUE;
+$db_name = $_ENV['MYSQL_DATABASE'];
 
-$settings['trusted_host_patterns'] = [
-  'localhost',
-];
-
-$base_url = 'http://localhost';
-
-$options['uri'] = 'http://localhost';
 $databases['default']['default'] = array(
   'database' => $_ENV['MYSQL_DATABASE'],
   'username' => $_ENV['MYSQL_USER'],
@@ -30,3 +27,11 @@ $databases['default']['default'] = array(
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
 );
+
+$settings['trusted_host_patterns'] = [
+  'localhost',
+];
+
+$base_url = 'http://localhost';
+
+$options['uri'] = 'http://localhost';
