@@ -162,3 +162,18 @@ dist
 
 # Additional
 dump/
+
+/.editorconfig
+local.settings.php
+local.drush.yml
+local.site.yml
+local.services.yml
+*.local
+local.blt.yml
+deployment_identifier
+/travis_wait*
+/files-private
+.phpcs-cache
+/.gitattributes
+
+.docker
