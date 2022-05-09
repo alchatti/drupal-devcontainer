@@ -19,7 +19,7 @@ then
 	# composer require drush/drush:^10.2 drupal/mysql56 --no-update
 	composer require --no-update drush/drush:^11
 
-	composer require acquia/blt --no-update
+	# composer require acquia/blt --no-update
 
 	mv /tmp/drupal/* $WORKSPACE_ROOT
 	rm /tmp/drupal -rf
