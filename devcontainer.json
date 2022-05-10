@@ -106,7 +106,7 @@
       "*.info": "ini",
       "*.html": "twig",
       "*.asp": "asp",
-      "*.gs": "javascript",
+      "*.gs": "javascript"
     },
     "emmet.includeLanguages": {
       "twig": "html"
@@ -215,6 +215,6 @@
   "remoteUser": "vscode",
   "remoteEnv": {
     "SHELL": "/bin/zsh",
-    "POSH_THEME_ENVIRONMENT": "blue-owl",
-  },
+    "POSH_THEME_ENVIRONMENT": "blue-owl"
+  }
 }
