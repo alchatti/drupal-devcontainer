@@ -99,6 +99,19 @@ RUN chmod +x /usr/local/bin/oh-my-posh && \
   rm /opt/themes.zip && \
   chmod o+r /opt/.poshthemes/*.json
 
+#Zsh Plugins
+ADD https://github.com/zsh-users/zsh-autosuggestions/archive/refs/heads/master.zip /tmp/zsh-autosuggestions.zip
+RUN unzip /tmp/zsh-autosuggestions.zip -d  /tmp/zsh-autosuggestions \
+  # && mkdir /home/vscode/.oh-my-zsh/plugins/zsh-autosuggestions \
+  && mv /tmp/zsh-autosuggestions/zsh-autosuggestions-master /home/vscode/.oh-my-zsh/plugins/zsh-autosuggestions \
+  && chown vscode:vscode /home/vscode/.oh-my-zsh/plugins/zsh-autosuggestions
+
+ADD https://github.com/zsh-users/zsh-syntax-highlighting/archive/refs/heads/master.zip /tmp/zsh-syntax-highlighting.zip
+RUN unzip /tmp/zsh-syntax-highlighting.zip -d  /tmp/zsh-syntax-highlighting \
+  # && mkdir /home/vscode/.oh-my-zsh/plugins/zsh-syntax-highlighting \
+  && mv /tmp/zsh-syntax-highlighting/zsh-syntax-highlighting-master /home/vscode/.oh-my-zsh/plugins/zsh-syntax-highlighting \
+  && chown vscode:vscode /home/vscode/.oh-my-zsh/plugins/zsh-syntax-highlighting
+
 # PowerShell
 ADD https://github.com/PowerShell/PowerShell/releases/download/v7.2.3/powershell-lts_7.2.3-1.deb_amd64.deb /tmp/powershell.deb
 RUN dpkg -i /tmp/powershell.deb && \
@@ -115,8 +128,10 @@ RUN chmod o+r /opt/microsoft/powershell/7-lts/profile.ps1
 USER vscode
 
 RUN echo "$(oh-my-posh init zsh)" >> ~/.zshrc && \
-  sed -ri -e 's!POSH_THEME="/home/vscode/.*.omp.json"!POSH_THEME="/opt/.poshthemes/$POSH_THEME_ENVIRONMENT.omp.json"!g' ~/.zshrc && \
+  sed -ri -e 's!export POSH_THEME=.*!export POSH_THEME="/opt/.poshthemes/$POSH_THEME_ENVIRONMENT.omp.json"!g' ~/.zshrc && \
   echo "exec \$SHELL -l"  >> ~/.bashrc
+
+RUN sed -ri -e 's!plugins=.*!plugins=(git zsh-autosuggestions zsh-syntax-highlighting)!g' ~/.zshrc
 
 # Drupal Coder and phpcs Requirements
 # version is specified due to bug https://www.drupal.org/project/coder/issues/3262291
