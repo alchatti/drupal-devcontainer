@@ -24,11 +24,11 @@ services:
       - "./config/php.ini:/usr/local/etc/php/conf.d/zphp.ini:ro"
       - "./config/dev.settings.php:/var/www/dev.settings.php"
       - "pnpm-store:/home/vscode/.pnpm-store/"
-      - "../dump:/dump"
       - "..:/var/www/html"
     command: sleep infinity
 volumes:
   database:
+
   # create using cli > docker volume create pnpm-store
   pnpm-store:
     external: true
