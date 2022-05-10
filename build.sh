@@ -24,7 +24,7 @@ else
   PHP=($PHP);
 fi;
 
-if [ -z "$NODE" ]; then NODE=$(curl -s https://api.github.com/repos/nodejs/node/releases/latest | grep "tag_name.*" | cut -d ":" -f 2 | cut -d "\"" -f 2 | sed 's/v//g'); echo "No version provided setting NODE to latest > $NODE";fi
+if [ -z "$NODE" ]; then NODE="node"; echo "No version provided setting NODE to latest";fi
 if [ -z "$SASS" ]; then SASS=$(curl -s https://api.github.com/repos/sass/dart-sass/releases/latest | grep "tag_name.*" | cut -d ":" -f 2 | cut -d "\"" -f 2); echo "No version provided setting SASS to latest > $SASS";fi
 
 
