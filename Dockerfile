@@ -68,7 +68,10 @@ RUN apt-get update; \
 
 # Init Script
 COPY ./.build/init.sh /init.sh
-RUN chmod o+xr /init.sh
+RUN chmod +x /init.sh
+
+COPY ./.build/ddump.sh /usr/bin/ddump
+RUN chmod +x /usr/bin/ddump
 
 # Add Drush Launcher for Global and local Drush
 ADD https://github.com/drush-ops/drush-launcher/releases/latest/download/drush.phar /usr/bin/drush
@@ -140,6 +143,7 @@ RUN ~/.composer/vendor/bin/phpcs --config-set installed_paths ~/.composer/vendor
 RUN sudo ln -s ~/.composer/vendor/bin/phpcs /usr/bin/phpcs
 
 RUN mkdir ~/.pnpm-store
+RUN mkdir ~/.acquia
 
 USER root
 
