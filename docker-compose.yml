@@ -8,6 +8,8 @@ services:
       - "./devcontainer.env"
     environment:
       cap_add: "SYS_NICE"
+    ports:
+      - "3306:3306"
     volumes:
       - "./config/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
       - database:/var/lib/mysql
