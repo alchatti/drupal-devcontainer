@@ -70,8 +70,15 @@ RUN apt-get update; \
 COPY ./.build/init.sh /init.sh
 RUN chmod +x /init.sh
 
-COPY ./.build/ddump.sh /usr/bin/ddump
-RUN chmod +x /usr/bin/ddump
+COPY ./.build/dump.sh /usr/bin/dump
+RUN chmod +x /usr/bin/dump
+
+COPY ./.build/drestore.sh /usr/bin/drestore
+RUN chmod +x /usr/bin/drestore
+
+COPY ./.build/acli-dump.sh /usr/bin/acli-dump
+RUN chmod +x /usr/bin/acli-dump
+
 
 # Add Drush Launcher for Global and local Drush
 ADD https://github.com/drush-ops/drush-launcher/releases/latest/download/drush.phar /usr/bin/drush
