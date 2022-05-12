@@ -1,5 +1,7 @@
-# Sql Dump using drush
 #!/bin/bash
+
+printf "Local database dump using drush\n======\n\n"
+
 if [ ! -d "/var/www/html/dump" ]
 then
   mkdir /var/www/html/dump
