@@ -16,7 +16,6 @@ services:
       # - "../dump/init.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
     image: alchatti/drupal-devcontainer:8.0
-    # hostname: drupal-devcontainer
     network_mode: service:db
     env_file:
       - "./devcontainer.env"

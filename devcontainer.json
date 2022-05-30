@@ -22,13 +22,13 @@
       "**/vendor/**"
     ],
     "php.validate.executablePath": "/usr/local/bin/php",
-    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.defaultProfile.linux": "fish",
     "terminal.integrated.profiles.linux": {
       "zsh": {
         "path": "/bin/zsh"
       },
       "pwsh": {
-        "path": "/usr/bin/pwsh"
+        "path": "/bin/fish"
       }
     },
     "css.validate": true,
@@ -167,9 +167,9 @@
     "VisualStudioExptTeam.vscodeintellicode",
     "rbbit.typescript-hero",
     "xshrim.txt-syntax",
-    "tsega.drupal-8-twig-snippets",
+    // "tsega.drupal-8-twig-snippets",
     "Gruntfuggly.todo-tree",
-    "cssho.vscode-svgviewer",
+    // "cssho.vscode-svgviewer",
     "richie5um2.vscode-sort-json",
     "mechatroner.rainbow-csv",
     "esbenp.prettier-vscode",
@@ -209,12 +209,12 @@
     80,
     3306
   ],
-  "postCreateCommand": "/init.sh",
-  "postStartCommand": "apachectl start",
+  // "postCreateCommand": "",
+  // "postStartCommand": "",
   // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
   "remoteUser": "vscode",
   "remoteEnv": {
-    "SHELL": "/bin/zsh",
-    "POSH_THEME_ENVIRONMENT": "blue-owl"
+    "SHELL": "/bin/fish"
+    // "POSH_THEME_ENVIRONMENT": "blue-owl"
   }
 }
