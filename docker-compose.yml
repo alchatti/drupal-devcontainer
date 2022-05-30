@@ -15,7 +15,8 @@ services:
       - database:/var/lib/mysql
       # - "../dump/init.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
-    image: alchatti/drupal-devcontainer:8.1
+    image: alchatti/drupal-devcontainer:8.0
+    # hostname: drupal-devcontainer
     network_mode: service:db
     env_file:
       - "./devcontainer.env"
@@ -24,7 +25,6 @@ services:
     volumes:
       - "~/.wakatime.cfg:/home/vscode/.wakatime.cfg:ro"
       - "~/.acquia:/home/vscode/.acquia" # Acquia Cli Secrets
-      - "./config/php.ini:/usr/local/etc/php/conf.d/zphp.ini:ro"
       - "./config/dev.settings.php:/var/www/dev.settings.php"
       - "pnpm-store:/home/vscode/.pnpm-store/"
       - "..:/var/www/html"
