@@ -81,7 +81,7 @@
       "editor.wordWrap": "off",
       "editor.rulers": [
         80
-      ],
+      ]
     },
     "intelephense.files.associations": [
       "*.php",
