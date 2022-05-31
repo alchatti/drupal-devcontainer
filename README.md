@@ -1,39 +1,69 @@
 # Dev Container for Drupal
 
-This project is created to provide a simple and quick configurable development container for Drupal.
+This project is created to provide a VS Code development container environment for Drupal utilizing the image from https://github.com/alchatti/drupal-devcontainer-image which is based on Microsoft PHP development container image.
 
-The image uses <https://mcr.microsoft.com/v2/vscode/devcontainers/php/tags/list> as base image with includes the following:
+# Usage
 
-- [Xdebug](https://xdebug.org/)
-- Zsh
+> If you are on Windows use WSL2 filesystem for optimal performance.
 
-In addition to that the following tools with drupal requirements:
+An example project is available at **WIP**
 
-- [X] [Composer](https://getcomposer.org/)
-- [X] [Drush](https://www.drush.org/latest/) & [Drush launcher](https://github.com/drush-ops/drush-launcher) with Drush 8 installed as global fallback for Drupal 7 & 8.
-- [X] [Drupal Coder](https://www.drupal.org/project/coder)
+This project implements [pNPM](https://pnpm.io/), a Fast, disk space efficient package manager for NodeJS.
+You will need to create an external docker volume using the following command:
 
-- [X] [Acquia cli](https://docs.acquia.com/acquia-cli/)
-- [ ] [Acquia BLT](https://docs.acquia.com/blt/) WIP
+```bash
+docker volume create pnpm-store
+```
 
-- [X] [Node.js](https://nodejs.org)
-- [X] [Dart Sass](https://github.com/sass/dart-sass)
+Or comment out `external:true` under pnpm-store volumes item in `docker-compose.yml` using `#`.
 
-This image also contains the following terminal enhancements:
+```yml
+pnpm-store:
+  # external: true
+```
 
-- [PowerShell](https://github.com/PowerShell/PowerShell)
-  - [posh-git](https://github.com/dahlbyk/posh-git): integrates Git and provides tab completion
-  - [PSReadLine](https://github.com/PowerShell/PSReadLine)
-  - [Terminal-Icons](https://github.com/devblackops/Terminal-Icons): use `dir` to display icons in the terminal
-  - [posh-sshell](https://github.com/dahlbyk/posh-sshell): provides utilities for working with SSH connections
+## Overview
 
-- [Oh My Posh](https://ohmyposh.dev/) for Zsh & PowerShell
+With Drupal your project folder structure should look similar to:
 
-## Quality of life
+> `docroot` is the public folder where your Drupal site is located. This is based on Acquia Cloud's project structure.
 
-### Development container CLI
+```text
+📂 My-Project
+├── 📂.devcontainer
+├── 📂.git
+├── 📂.vscode
+├── 📂 docroot
+├── 📂 dump
+├── 📂 vendor
+├── 📄.editorconfig
+├── 📄.gitignore
+├── 📄.gitmodules
+├── 📄 composer.json
+└── 📄 composer.lock
+```
 
-To launch a devcontainer instance from command line instead of using VS Code. Allows you to use the following commands:
+### - Option A: Submodule
+
+Use it as a submodule of your Drupal project git repository. Inside the project directory run the following command.
+
+```bash
+git submodule add https://github.com/alchatti/devcontainer-drupal.git .devcontainer
+```
+
+Once cloned, you should have `.devcontainer` as a nested git repo. You can create your own branch and remote for .devcontainer.
+
+Refer to <https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories> for more information.
+
+### - Option B: Zip Archive
+
+- Download as a zip file and extract the root of your project under `.devcontainer` directory.
+
+## Build & Launch
+
+From within VS Code <https://code.visualstudio.com/docs/remote/containers>.
+
+Or using devcontainer-cli which allows you to launch commandline without the need to reopen vscode for relaunch:
 
 ```bash
 # Build a new devcontainer instance
@@ -42,92 +72,68 @@ devcontainer build .
 devcontainer open .
 ```
 
-Refer to <https://code.visualstudio.com/docs/remote/devcontainer-cli> for more information.
+For more information refer to <https://code.visualstudio.com/docs/remote/devcontainer-cli>.
 
-### Sharing Git credentials with your container
-
-To use your credential helper and SSH keys with the devcontainer instance
-
-Refer to <https://code.visualstudio.com/docs/remote/containers#_sharing-git-credentials-with-your-container> for more information.
-
-## Usage
-
-> If you are on Windows use WSL2 filesystem for optimal performance.
-
-### Setup
-
-Once setup is completed your project directory should look similar to:
-
-```html
-📂 Project-Name
- ├── 📂.devcontainer
- ├── 📂.git
- ├── 📄.gitignore
- ├── 📄.gitmodules
- ├── 📂.vscode
- ├── 📄composer.json
- ├── 📄composer.lock
- ├── 📂docroot
- └── 📂vendor
-```
-
-#### - Option A: Submodule
-
-- This project can be used as a submodule inside the primary project directory.
-
-```bash
-git submodule add https://github.com/alchatti/devcontainer-drupal.git .devcontainer
-```
-
-Once cloned you can browser to `.devcontainer` directory and add your own upstream or replace origin remote to keep and store your changes.
-
-Refer to <https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories> for more information.
-
-#### - Option B: Zip Archive
-
-- Download as a zip file and extract it to the root of your project under `.devcontainer` directory.
-
-### Build & Launch
-
-The devcontainer can be intialized by running the following command:
-
-```bash
-# Launch a devcontainer instance
-devcontainer open .
-```
-
-Or from within VS Code <https://code.visualstudio.com/docs/remote/containers>.
-
-## Configuration
+# Configurations
 
 Once setup is completed under `.devcontainer` directory you can find the following files:
 
-- `config/apache/000-default.conf` & `config/apache/default-ssl.conf`: Apache configuration files.
 - `config/mysql.cnf`: MySQL configuration file.
-- `config/php.ini`: PHP configuration file including Xdebug.
-- `config/settings.local.php`: Additional Drupal site configuration uses environment variables for Database connection. Refer to the file for more usage details.
+- `config/dev.setttings.php`: Devcontainer Drupal site configuration and environment based Database connection.
+
+## Development settings `example.dev.setttings.php`
+
+To use this file and limit it to development environment, you can use the following steps:
+
+1. Add the following code to the end of your `settings.php` file.
+
+```php
+  if ( file_exists('/var/www/dev.settings.php')) {
+    include '/var/www/dev.settings.php';
+   }
+```
 
 ### Change default shell
 
-In `devcontainer.json` you can change the default shell to use **Zsh**.
+In `devcontainer.json` you can change the default shell to use **zsh**.
 
 ```json
-# Change default shell to Zsh
 "terminal.integrated.defaultProfile.linux": "zsh",
 ```
 
-### Change oh-my-posh theme
+### Change environment variables & shell color theme
 
-In `devcontainer.json` you can change the default shell to use **Zsh**.
+In `devcontainer.json` you can change the default shell & theme by updating the `remoteEnv` property as follow:
+
+- **SHELL** : changes shell, you can use `/bin/fish` or `/bin/zsh`.
+- **POSH_THEME_ENVIRONMENT** to change the shell theme, check [Oh My Posh themes](https://ohmyposh.dev/docs/themes) for options.
 
 ```json
 "remoteEnv": {
   "SHELL": "/bin/zsh",
-  /* Change the following value https://ohmyposh.dev/docs/themes*/
   "POSH_THEME_ENVIRONMENT": "blue-owl",
  },
 ```
 
-## License
+## Quality of life
+
+### Sharing Git credentials with your container
+
+To use your credential helper and SSH keys within the devcontainer instance use the following guide <https://code.visualstudio.com/docs/remote/containers#_sharing-git-credentials-with-your-container>.
+
+If you are using WSL2 you need to configure that first before using it in the devcontainer.
+
+### Git Submodules
+
+```bash
+git clone --recurse-submodules $projectRepoUrl
+```
+
+# Reference
+
+- Docker Repo https://hub.docker.com/r/alchatti/drupal-devcontainer
+- Image issues, details, source https://github.com/alchatti/drupal-devcontainer-image
+
+# License
 
 This repository is under an [MIT license](https://github.com/alchatti/devcontainer-drupal/blob/main/LICENSE) unless indicated otherwise.
