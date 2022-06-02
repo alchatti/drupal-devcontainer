@@ -25,13 +25,13 @@
     "terminal.integrated.defaultProfile.linux": "fish",
     "terminal.integrated.profiles.linux": {
       "fish": {
-        "path": "/bin/fish"
+        "path": "/usr/bin/fish"
       },
       "zsh": {
-        "path": "/bin/zsh"
+        "path": "/usr/bin/zsh"
       },
       "sh": {
-        "path": "/bin/sh"
+        "path": "/usr/bin/sh"
       }
     },
     "css.validate": true,
@@ -217,7 +217,7 @@
   // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
   "remoteUser": "vscode",
   "remoteEnv": {
-    // "SHELL": "/bin/fish"
+    "SHELL": "/usr/bin/fish"
     // "POSH_THEME_ENVIRONMENT": "blue-owl"
     // "APACHE_DOCUMENT_ROOT": "web"
   }

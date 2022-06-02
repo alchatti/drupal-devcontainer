@@ -85,13 +85,23 @@ Once setup is completed under `.devcontainer` directory you can find the followi
 
 To use this file and limit it to development environment, you can use the following steps:
 
-1. Add the following code to the end of your site `settings.php` file.
+1. Copy the example file to your project directory under `.dev`
+
+```bash
+mkdir .dev && \
+cp .devcontainer/example.dev.settings.php \
+./.dev/default.settings.php
+```
+
+2. Add the following code to the end of your site `settings.php` file.
 
 ```php
-  if ( file_exists('/var/www/dev.settings.php')) {
-    include '/var/www/dev.settings.php';
+  if ( file_exists('/var/www/site-php/dev.settings.php')) {
+    include '/var/www/site-php/dev.settings.php';
    }
 ```
+
+3. docker-compose mapped the `.dev` directory to `/var/www/site-php/`
 
 ### Change default shell
 
