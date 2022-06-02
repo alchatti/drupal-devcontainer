@@ -26,7 +26,7 @@ pnpm-store:
 
 With Drupal your project folder structure should look similar to:
 
-> `docroot` is the public folder where your Drupal site is located. This is based on Acquia Cloud's project structure.
+> `docroot` is the public folder where your Drupal site is located. This is based on Acquia Cloud's project structure. Check [Change environment variables & shell themes](#env-variables)
 
 ```text
 📂 My-Project
@@ -81,11 +81,11 @@ Once setup is completed under `.devcontainer` directory you can find the followi
 - `config/mysql.cnf`: MySQL configuration file.
 - `config/dev.setttings.php`: Devcontainer Drupal site configuration and environment based Database connection.
 
-## Development settings `example.dev.setttings.php`
+## Development settings `dev.setttings.php`
 
 To use this file and limit it to development environment, you can use the following steps:
 
-1. Add the following code to the end of your `settings.php` file.
+1. Add the following code to the end of your site `settings.php` file.
 
 ```php
   if ( file_exists('/var/www/dev.settings.php')) {
@@ -101,17 +101,19 @@ In `devcontainer.json` you can change the default shell to use **zsh**.
 "terminal.integrated.defaultProfile.linux": "zsh",
 ```
 
-### Change environment variables & shell color theme
+### Change environment variables & shell themes {#env-variables}
 
 In `devcontainer.json` you can change the default shell & theme by updating the `remoteEnv` property as follow:
 
 - **SHELL** : changes shell, you can use `/bin/fish` or `/bin/zsh`.
 - **POSH_THEME_ENVIRONMENT** to change the shell theme, check [Oh My Posh themes](https://ohmyposh.dev/docs/themes) for options.
+- **APACHE_DOCUMENT_ROOT** to change the apache app root from `docroot`, `web`, `public` or anything else.
 
 ```json
 "remoteEnv": {
   "SHELL": "/bin/zsh",
   "POSH_THEME_ENVIRONMENT": "blue-owl",
+  "APACHE_DOCUMENT_ROOT": "web"
  },
 ```
 
