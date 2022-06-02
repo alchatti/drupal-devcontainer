@@ -26,7 +26,7 @@ pnpm-store:
 
 With Drupal your project folder structure should look similar to:
 
-> `docroot` is the public folder where your Drupal site is located. This is based on Acquia Cloud's project structure. Check [Change environment variables & shell themes](#env-variables)
+> `docroot` is the public folder where your Drupal site is located. This is based on Acquia Cloud's project structure. Check [Change environment variables & shell themes](#change-environment-variables--shell-themes-env-variables)
 
 ```text
 📂 My-Project
@@ -101,7 +101,7 @@ In `devcontainer.json` you can change the default shell to use **zsh**.
 "terminal.integrated.defaultProfile.linux": "zsh",
 ```
 
-### Change environment variables & shell themes {#env-variables}
+### Change environment variables & shell themes
 
 In `devcontainer.json` you can change the default shell & theme by updating the `remoteEnv` property as follow:
 
