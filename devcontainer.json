@@ -219,5 +219,6 @@
   "remoteEnv": {
     // "SHELL": "/bin/fish"
     // "POSH_THEME_ENVIRONMENT": "blue-owl"
+    // "APACHE_DOCUMENT_ROOT": "web"
   }
 }
