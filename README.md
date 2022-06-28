@@ -8,7 +8,7 @@ This project is created to provide a VS Code development container environment f
 
 An example project is available at **WIP**
 
-This project implements [pnpm](https://pnpm.io/), a Fast, disk space efficient package manager for NodeJS.
+Note: this project implements [pnpm](https://pnpm.io/), a Fast, disk space efficient package manager for NodeJS.
 You will need to create an external docker volume using the following command:
 
 ```bash
@@ -22,9 +22,7 @@ pnpm-store:
   # external: true
 ```
 
-## Overview
-
-With Drupal your project folder structure should look similar to:
+For devcontainer to work your Drupal project folder structure should look similar to:
 
 > `docroot` is the public folder where your Drupal site is located. This is based on Acquia Cloud's project structure. Check [Change environment variables & shell themes](#change-environment-variables--shell-themes-env-variables)
 
