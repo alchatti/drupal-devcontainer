@@ -1,4 +1,4 @@
-# Drupal Devcontainer base
+# Drupal Devcontainer
 
 This project is created to provide a VS Code development container environment for Drupal utilizing the image from https://github.com/alchatti/drupal-devcontainer-image which is based on Microsoft PHP development container image.
 
