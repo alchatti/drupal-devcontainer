@@ -1,12 +1,12 @@
 # Drupal Devcontainer
 
-This project is created to provide a VS Code development container environment for Drupal utilizing the image from https://github.com/alchatti/drupal-devcontainer-image which is based on Microsoft PHP development container image.
+This project is created to provide a VS Code development container environment for Drupal utilizing the image from [alchatti/drupal-devcontainer-image](https://github.com/alchatti/drupal-devcontainer-image) which is based on Microsoft PHP development container image.
 
 ## Usage
 
 > If you are on Windows use WSL2 filesystem for optimal performance.
 
-An example project is available at **WIP**
+An example project is available at [alchatti/drupal-devcontainer-sample-project](https://github.com/alchatti/drupal-devcontainer-sample-project)
 
 Note: this project implements [pnpm](https://pnpm.io/), a Fast, disk space efficient package manager for NodeJS.
 You will need to create an external docker volume using the following command:
@@ -78,6 +78,14 @@ Once setup is completed under `.devcontainer` directory you can find the followi
 
 - `config/mysql.cnf`: MySQL configuration file.
 - `config/dev.setttings.php`: Devcontainer Drupal site configuration and environment based Database connection.
+
+Change the PHP & MySQL versions you can edit `.env` file
+
+```ini
+PHP_VERSION=8.0
+MYSQL_VERSION=5.7
+```
+**Note** that you will need to remove the old created containers for this project on version change.
 
 ## Development settings `dev.setttings.php`
 
