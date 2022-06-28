@@ -2,13 +2,13 @@
 
 This project is created to provide a VS Code development container environment for Drupal utilizing the image from https://github.com/alchatti/drupal-devcontainer-image which is based on Microsoft PHP development container image.
 
-# Usage
+## Usage
 
 > If you are on Windows use WSL2 filesystem for optimal performance.
 
 An example project is available at **WIP**
 
-This project implements [pNPM](https://pnpm.io/), a Fast, disk space efficient package manager for NodeJS.
+This project implements [pnpm](https://pnpm.io/), a Fast, disk space efficient package manager for NodeJS.
 You will need to create an external docker volume using the following command:
 
 ```bash
@@ -74,7 +74,7 @@ devcontainer open .
 
 For more information refer to <https://code.visualstudio.com/docs/remote/devcontainer-cli>.
 
-# Configurations
+## Configurations
 
 Once setup is completed under `.devcontainer` directory you can find the following files:
 
@@ -89,11 +89,11 @@ To use this file and limit it to development environment, you can use the follow
 
 ```bash
 mkdir .dev && \
-cp .devcontainer/example.dev.settings.php \
-./.dev/default.settings.php
+cp .devcontainer/.dev/example.dev.settings.php \
+./.dev/dev.settings.php
 ```
 
-2. Add the following code to the end of your site `settings.php` file.
+2.Add the following code to the end of your site `settings.php` file.
 
 ```php
   if ( file_exists('/var/www/site-php/dev.settings.php')) {
@@ -101,7 +101,13 @@ cp .devcontainer/example.dev.settings.php \
    }
 ```
 
-3. docker-compose mapped the `.dev` directory to `/var/www/site-php/`
+3.docker-compose mappes the `.dev` directory to `/var/www/site-php/`
+
+4.For optional `gitignore` copy the file under `.dev` to root of your project.
+
+```bash
+cp .devcontainer/.dev/example.gitignore  ./.gitignore
+```
 
 ### Change default shell
 
@@ -141,11 +147,20 @@ If you are using WSL2 you need to configure that first before using it in the de
 git clone --recurse-submodules $projectRepoUrl
 ```
 
-# Reference
+### Config Sync folder location
+
+It is recommended to change the default config sync folder location out of the docroot folder.
+
+```bash
+### In settings.php add the following line
+$settings['config_sync_directory'] = '../config';
+```
+
+## Reference
 
 - Docker Repo https://hub.docker.com/r/alchatti/drupal-devcontainer
 - Image issues, details, source https://github.com/alchatti/drupal-devcontainer-image
 
-# License
+## License
 
 This repository is under an [MIT license](https://github.com/alchatti/devcontainer-drupal/blob/main/LICENSE) unless indicated otherwise.
