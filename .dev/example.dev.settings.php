@@ -9,8 +9,8 @@
  *
  * To activate this file, copy the following code to the end of your
  * settings.php.
- * # if ( file_exists('/var/www/dev.settings.php')) {
- * #   include '/var/www/dev.settings.php';
+ * # if ( file_exists('/var/www/site-dev/dev.settings.php')) {
+ * #   include '/var/www/site-dev/dev.settings.php';
  * #  }
  * $settings['config_sync_directory'] = '../config/sync';
  */
