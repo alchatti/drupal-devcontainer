@@ -165,7 +165,8 @@ $settings['config_sync_directory'] = '../config';
 ## Reference
 
 - Docker Repo https://hub.docker.com/r/alchatti/drupal-devcontainer
-- Image issues, details, source https://github.com/alchatti/drupal-devcontainer-image
+- Image issues, details, source [alchatti/drupal-devcontainer-image](https://github.com/alchatti/drupal-devcontainer-image)
+- Sample project [alchatti/drupal-devcontainer-sample-project](https://github.com/alchatti/drupal-devcontainer-sample-project)
 
 ## License
 
