@@ -25,7 +25,7 @@ services:
       - "pnpm-store:/home/vscode/.pnpm-store"
       - "acquia:/home/vscode/.acquia" # Acquia
       - "~/.wakatime.cfg:/home/vscode/.wakatime.cfg"
-      # - "~/.ssh:/home/vscode/.ssh"
+      - "~/.ssh:/home/vscode/.ssh"
       - "../.dev:/var/www/site-dev"
       - "..:/var/www/html"
     command: sleep infinity
