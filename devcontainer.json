@@ -205,7 +205,9 @@
     "ikappas.phpcs",
     "neilbrayfield.php-docblocker",
     "DmitryDorofeev.empty-indent",
-    "eamodio.toggle-excluded-files"
+    "eamodio.toggle-excluded-files",
+    "mrmlnc.vscode-scss",
+    "maptz.regionfolder"
   ],
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [
