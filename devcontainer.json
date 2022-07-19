@@ -207,7 +207,9 @@
     "DmitryDorofeev.empty-indent",
     "eamodio.toggle-excluded-files",
     "mrmlnc.vscode-scss",
-    "maptz.regionfolder"
+    "maptz.regionfolder",
+    "dbaeumer.vscode-eslint",
+    "ms-vsliveshare.vsliveshare"
   ],
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [
