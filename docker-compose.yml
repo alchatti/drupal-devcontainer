@@ -19,8 +19,6 @@ services:
     network_mode: service:db
     env_file:
       - "./devcontainer.env"
-    environment:
-      AH_SITE_ENVIRONMENT: "dev" # Acquia Enviroment
     volumes:
       - "pnpm-store:/home/vscode/.pnpm-store"
       - "acquia:/home/vscode/.acquia" # Acquia

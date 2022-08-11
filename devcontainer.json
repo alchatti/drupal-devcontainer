@@ -158,7 +158,8 @@
       "titleBar.inactiveBackground": "#0678be99",
       "titleBar.inactiveForeground": "#e7e7e799"
     },
-    "peacock.remoteColor": "#0678be"
+    "peacock.remoteColor": "#0678be",
+    "conventionalCommits.emojiFormat": "emoji"
   },
   // Add the IDs of extensions you want installed when the container is created.
   "extensions": [
@@ -172,7 +173,6 @@
     "xshrim.txt-syntax",
     // "tsega.drupal-8-twig-snippets",
     "Gruntfuggly.todo-tree",
-    // "cssho.vscode-svgviewer",
     "richie5um2.vscode-sort-json",
     "mechatroner.rainbow-csv",
     "esbenp.prettier-vscode",
@@ -198,14 +198,17 @@
     "naumovs.color-highlight",
     "streetsidesoftware.code-spell-checker",
     "wmaurer.change-case",
-    "HookyQR.beautify",
     "michelemelluso.code-beautifier",
     "ikappas.composer",
     "mblode.twig-language-2",
     "ikappas.phpcs",
     "neilbrayfield.php-docblocker",
     "DmitryDorofeev.empty-indent",
-    "eamodio.toggle-excluded-files"
+    "eamodio.toggle-excluded-files",
+    "mrmlnc.vscode-scss",
+    "maptz.regionfolder",
+    "dbaeumer.vscode-eslint",
+    "ms-vsliveshare.vsliveshare"
   ],
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [
