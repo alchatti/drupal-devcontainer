@@ -20,7 +20,7 @@ services:
     env_file:
       - "./devcontainer.env"
     volumes:
-      - "pnpm-store:/home/vscode/.pnpm-store"
+      # - "pnpm-store:/home/vscode/.pnpm-store"
       - "acquia:/home/vscode/.acquia" # Acquia
       - "~/.wakatime.cfg:/home/vscode/.wakatime.cfg"
       - "~/.ssh:/home/vscode/.ssh"
@@ -31,5 +31,5 @@ volumes:
   database:
   acquia:
   # create >  docker volume create pnpm-store
-  pnpm-store:
-    external: true
+  # pnpm-store:
+    # external: true
