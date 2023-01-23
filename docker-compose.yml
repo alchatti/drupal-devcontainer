@@ -16,7 +16,7 @@ services:
       # - "../dump/init.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
     image: alchatti/drupal-devcontainer:${PHP_VERSION}
-    network_mode: service:db
+    network_mode: "host"
     env_file:
       - "./devcontainer.env"
     volumes:
