@@ -9,10 +9,11 @@
  *
  * To activate this file, copy the following code to the end of your
  * settings.php.
- * # if ( file_exists('/var/www/site-dev/dev.settings.php')) {
- * #   include '/var/www/site-dev/dev.settings.php';
- * #  }
- * $settings['config_sync_directory'] = '../config/sync';
+ *
+ * # $settings['config_sync_directory'] = '../config';
+ * # if (file_exists('/var/www/site-dev/dev.settings.php')) {
+ * #  include '/var/www/site-dev/dev.settings.php';
+ * # }
  */
 
 $db_name = $_ENV['MYSQL_DATABASE'];
@@ -26,6 +27,10 @@ $databases['default']['default'] = [
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
+  'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
+  'init_commands' => [
+    'isolation_level' => 'SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED',
+  ],
 ];
 
 $settings['trusted_host_patterns'] = [
