@@ -28,7 +28,7 @@ services:
     command: sleep infinity
 volumes:
   database:
-  acquia:
+  # acquia:
   # create >  docker volume create pnpm-store
   # pnpm-store:
   #   external: true
