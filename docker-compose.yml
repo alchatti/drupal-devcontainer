@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   db:
-    image: mysql:${MYSQL_VERSION}
+    image: mysql:8
     restart: unless-stopped
     env_file:
       - "./devcontainer.env"
@@ -15,14 +15,14 @@ services:
       - database:/var/lib/mysql
       # - "../dump/init.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
-    image: alchatti/drupal-devcontainer:${PHP_VERSION}
+    image: alchatti/drupal-devcontainer:8.1
     env_file:
       - "./devcontainer.env"
     volumes:
       # - "pnpm-store:/home/vscode/.pnpm-store"
-      - "acquia:/home/vscode/.acquia" # Acquia
-      - "~/.wakatime.cfg:/home/vscode/.wakatime.cfg"
-      - "~/.ssh:/home/vscode/.ssh"
+      - "~/.acquia:/home/vscode/.acquia" # Acquia Cloud Cli Share with host
+      - "~/.ssh:/home/vscode/.ssh" # SSH Keys share with host
+      - "~/.wakatime.cfg:/home/vscode/.wakatime.cfg" # Wakatime share with host
       - "../.dev:/var/www/site-dev"
       - "..:/var/www/html"
     command: sleep infinity
@@ -31,4 +31,4 @@ volumes:
   acquia:
   # create >  docker volume create pnpm-store
   # pnpm-store:
-    # external: true
+  #   external: true
