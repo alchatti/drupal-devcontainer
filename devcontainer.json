@@ -201,7 +201,7 @@
     "michelemelluso.code-beautifier",
     "ikappas.composer",
     "mblode.twig-language-2",
-    "ikappas.phpcs",
+    "ValeryanM.vscode-phpsab",
     "neilbrayfield.php-docblocker",
     "DmitryDorofeev.empty-indent",
     "eamodio.toggle-excluded-files",
