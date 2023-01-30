@@ -208,7 +208,8 @@
     "mrmlnc.vscode-scss",
     "maptz.regionfolder",
     "dbaeumer.vscode-eslint",
-    "ms-vsliveshare.vsliveshare"
+    "ms-vsliveshare.vsliveshare",
+    "csstools.postcss"
   ],
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [
