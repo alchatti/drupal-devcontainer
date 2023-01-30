@@ -1,8 +1,8 @@
 version: "3.8"
 
 services:
-  db:
-    image: mysql:5
+  database:
+    image: mysql:5.7
     restart: unless-stopped
     env_file:
       - "./devcontainer.env"
@@ -12,10 +12,10 @@ services:
       - "3306:3306"
     volumes:
       - "./config/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
-      - database:/var/lib/mysql
+      - database_store:/var/lib/mysql
       # - "../dump/init.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
-    image: alchatti/drupal-devcontainer:7
+    image: alchatti/drupal-devcontainer:7.4
     env_file:
       - "./devcontainer.env"
     volumes:
@@ -27,8 +27,8 @@ services:
       - "..:/var/www/html"
     command: sleep infinity
 volumes:
-  database:
-  # acquia:
+  database_store:
+  acquia:
   # create >  docker volume create pnpm-store
   # pnpm-store:
   #   external: true
