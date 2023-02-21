@@ -218,7 +218,7 @@
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
 		80,
-		3306
+		"database:3306"
 	],
 	// "postCreateCommand": "",
 	// "postStartCommand": "",

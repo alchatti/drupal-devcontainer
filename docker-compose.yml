@@ -11,10 +11,6 @@ services:
       MYSQL_ROOT_PASSWORD: "rootpassword"
     cap_add:
       - SYS_NICE
-    ports:
-      - "3306:3306"
-    expose:
-      - "3306"
     volumes:
       - "./config/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
       - db:/var/lib/mysql
@@ -32,11 +28,11 @@ services:
       - "../.dev:/var/www/site-dev"
       - "..:/var/www/html"
     command: sleep infinity
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 18080:8080
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 18080:8080
 volumes:
   db:
   acquia:
