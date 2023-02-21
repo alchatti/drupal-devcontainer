@@ -13,6 +13,8 @@ services:
       - SYS_NICE
     ports:
       - "3306:3306"
+    expose:
+      - "3306"
     volumes:
       - "./config/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
       - db:/var/lib/mysql
