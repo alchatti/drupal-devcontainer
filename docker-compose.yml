@@ -15,7 +15,7 @@ services:
       - "3306:3306"
     volumes:
       - "./config/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
-      - database_store:/var/lib/mysql
+      - db:/var/lib/mysql
       # - "../dump/init.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
     image: alchatti/drupal-devcontainer:7.4
@@ -36,7 +36,7 @@ services:
     ports:
       - 18080:8080
 volumes:
-  database_store:
+  db:
   acquia:
   # create >  docker volume create pnpm-store
   # pnpm-store:
