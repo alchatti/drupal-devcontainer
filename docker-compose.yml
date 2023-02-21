@@ -4,10 +4,13 @@ services:
   database:
     image: mysql:5.7
     restart: unless-stopped
-    env_file:
-      - "./devcontainer.env"
     environment:
-      cap_add: "SYS_NICE"
+      MYSQL_DATABASE: "db"
+      MYSQL_USER: "drupal"
+      MYSQL_PASSWORD: "drupalpassword"
+      MYSQL_ROOT_PASSWORD: "rootpassword"
+    cap_add:
+      - SYS_NICE
     ports:
       - "3306:3306"
     volumes:
@@ -16,8 +19,9 @@ services:
       # - "../dump/init.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
     image: alchatti/drupal-devcontainer:7.4
-    env_file:
-      - "./devcontainer.env"
+    environment:
+      MYSQL_USER: "drupal"
+      MYSQL_PASSWORD: "drupalpassword"
     volumes:
       # - "pnpm-store:/home/vscode/.pnpm-store"
       - "~/.acquia:/home/vscode/.acquia" # Acquia Cloud Cli Share with host
