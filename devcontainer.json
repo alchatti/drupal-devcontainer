@@ -6,211 +6,212 @@
   "service": "app",
   "workspaceFolder": "/var/www/html",
   "shutdownAction": "stopCompose",
-  // Set *default* container specific settings.json values on container create.
-  "settings": {
-    "files.eol": "\n",
-    "cSpell.language": ",en",
-    "cSpell.logLevel": "Warning",
-    "cSpell.ignorePaths": [
-      "**/package-lock.json",
-      "**/node_modules/**",
-      "**/vscode-extension/**",
-      "**/.git/**",
-      ".vscode",
-      "typings",
-      "**/*.*.map",
-      "**/vendor/**"
-    ],
-    "php.validate.executablePath": "/usr/local/bin/php",
-    "terminal.integrated.defaultProfile.linux": "fish",
-    "terminal.integrated.profiles.linux": {
-      "fish": {
-        "path": "/usr/bin/fish"
+  "customizations": {
+    "vscode": {
+      // Set *default* container specific settings.json values on container create.
+      "settings": {
+        "files.eol": "\n",
+        "cSpell.language": ",en",
+        "cSpell.logLevel": "Warning",
+        "cSpell.ignorePaths": [
+          "**/package-lock.json",
+          "**/node_modules/**",
+          "**/vscode-extension/**",
+          "**/.git/**",
+          ".vscode",
+          "typings",
+          "**/*.*.map",
+          "**/vendor/**"
+        ],
+        "php.validate.executablePath": "/usr/local/bin/php",
+        "terminal.integrated.defaultProfile.linux": "fish",
+        "terminal.integrated.profiles.linux": {
+          "fish": {
+            "path": "/usr/bin/fish"
+          },
+          "zsh": {
+            "path": "/usr/bin/zsh"
+          },
+          "sh": {
+            "path": "/usr/bin/sh"
+          }
+        },
+        "css.validate": true,
+        "diffEditor.ignoreTrimWhitespace": false,
+        "[css]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[html]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[javascript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[json]": {
+          "editor.defaultFormatter": "vscode.json-language-features"
+        },
+        "[jsonc]": {
+          "editor.defaultFormatter": "vscode.json-language-features"
+        },
+        "[scss]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[php]": {
+          "editor.tabSize": 2,
+          "editor.autoIndent": "full",
+          "editor.insertSpaces": true,
+          "editor.formatOnPaste": true,
+          "editor.renderWhitespace": "boundary",
+          "editor.wordWrapColumn": 80,
+          "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
+          "editor.detectIndentation": true,
+          "editor.wordWrap": "off",
+          "editor.rulers": [
+            80
+          ]
+        },
+        "intelephense.files.associations": [
+          "*.php",
+          "*.phtml",
+          "*.inc",
+          "*.module",
+          "*.install",
+          "*.theme",
+          "*.profile",
+          "*.tpl.php",
+          "*.test"
+        ],
+        "files.associations": {
+          "*.inc": "php",
+          "*.module": "php",
+          "*.install": "php",
+          "*.theme": "php",
+          "*.profile": "php",
+          "*.tpl.php": "php",
+          "*.test": "php",
+          "*.php": "php",
+          "*.info": "ini",
+          "*.html": "twig",
+          "*.asp": "asp",
+          "*.gs": "javascript"
+        },
+        "emmet.includeLanguages": {
+          "twig": "html"
+        },
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+        "html.format.enable": true,
+        "html.format.wrapLineLength": 80,
+        /* Empty Indent */
+        "emptyIndent.removeIndent": true,
+        "emptyIndent.highlightIndent": false,
+        "emptyIndent.highlightColor": "rgba(246,36,89,0.6)",
+        /* Disable for Drupal 7 */
+        "phpcs.enable": true,
+        "phpcs.standard": "Drupal,DrupalPractice",
+        /* END Disable for Drupal 7 */
+        "php.validate.enable": true,
+        "php.validate.run": "onType",
+        "php.suggest.basic": false,
+        "intelephense.environment.documentRoot": "core/index.php",
+        "intelephense.format.braces": "k&r",
+        "php-docblocker.gap": true,
+        "php-docblocker.useShortNames": true,
+        "editor.bracketPairColorization.enabled": true,
+        "editor.colorDecorators": true,
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.guides.bracketPairs": true,
+        "editor.guides.bracketPairsHorizontal": "active",
+        "editor.inlineSuggest.enabled": true,
+        "git.promptToSaveFilesBeforeCommit": "always",
+        "todo-tree.general.tags": [
+          "TODO",
+          "FIXME",
+          "NOTE",
+          "NEXT",
+          "[ ]",
+          "[x]"
+        ],
+        "todo-tree.highlights.customHighlight": {
+          "FIXME": {
+            "icon": "tools",
+            "iconColour": "#FED000"
+          },
+          "NOTE": {
+            "foreground": "#ce93d8",
+            "icon": "tag",
+            "iconColour": "#ce93d8",
+            "type": "line"
+          },
+          "TODO": {}
+        },
+        "todo-tree.highlights.defaultHighlight": {
+          "foreground": "#378805",
+          "type": "none"
+        },
+        "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+        "workbench.colorCustomizations": {
+          "sash.hoverBorder": "#0897ef",
+          "titleBar.activeBackground": "#0678be",
+          "titleBar.activeForeground": "#e7e7e7",
+          "titleBar.inactiveBackground": "#0678be99",
+          "titleBar.inactiveForeground": "#e7e7e799"
+        },
+        "peacock.remoteColor": "#0678be",
+        "conventionalCommits.emojiFormat": "emoji"
       },
-      "zsh": {
-        "path": "/usr/bin/zsh"
-      },
-      "sh": {
-        "path": "/usr/bin/sh"
-      }
-    },
-    "css.validate": true,
-    "diffEditor.ignoreTrimWhitespace": false,
-    "[css]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[html]": {
-      "editor.defaultFormatter": "HookyQR.beautify"
-    },
-    "[javascript]": {
-      "editor.defaultFormatter": "vscode.typescript-language-features"
-    },
-    "[json]": {
-      "editor.defaultFormatter": "vscode.json-language-features"
-    },
-    "[jsonc]": {
-      "editor.defaultFormatter": "vscode.json-language-features"
-    },
-    "[scss]": {
-      "editor.defaultFormatter": "HookyQR.beautify"
-    },
-    "[typescript]": {
-      "editor.defaultFormatter": "vscode.typescript-language-features"
-    },
-    "beautify.config": {
-      "html": {
-        "wrap_attributes": "force-aligned"
-      }
-    },
-    "beautify.language": {
-      "html": [
-        "html",
-        "php",
-        "erb"
-      ],
-      "indent_char": "\t",
-      "indent_size": 2,
-      "js": []
-    },
-    "[php]": {
-      "editor.tabSize": 2,
-      "editor.autoIndent": "full",
-      "editor.insertSpaces": true,
-      "editor.formatOnPaste": true,
-      "editor.renderWhitespace": "boundary",
-      "editor.wordWrapColumn": 80,
-      "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
-      "editor.detectIndentation": true,
-      "editor.wordWrap": "off",
-      "editor.rulers": [
-        80
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "xdebug.php-debug",
+        "DotJoshJohnson.xml",
+        "WakaTime.vscode-wakatime",
+        "VisualStudioExptTeam.vscodeintellicode",
+        "Gruntfuggly.todo-tree",
+        "richie5um2.vscode-sort-json",
+        "mechatroner.rainbow-csv",
+        "esbenp.prettier-vscode",
+        "christian-kohler.path-intellisense",
+        "christian-kohler.npm-intellisense",
+        "DavidAnson.vscode-markdownlint",
+        "bierner.markdown-mermaid",
+        "shd101wyy.markdown-preview-enhanced",
+        "Tyriar.lorem-ipsum",
+        "Zignd.html-css-class-completion",
+        "bradgashler.htmltagwrap",
+        "ecmel.vscode-html-css",
+        "eamodio.gitlens",
+        "GitHub.vscode-pull-request-github",
+        "GitHub.copilot",
+        "GitHub.copilot-labs",
+        "mhutchie.git-graph",
+        "rifi2k.format-html-in-php",
+        "pranaygp.vscode-css-peek",
+        "vivaxy.vscode-conventional-commits",
+        "naumovs.color-highlight",
+        "streetsidesoftware.code-spell-checker",
+        "wmaurer.change-case",
+        "michelemelluso.code-beautifier",
+        "ikappas.composer",
+        "ValeryanM.vscode-phpsab",
+        "neilbrayfield.php-docblocker",
+        "eamodio.toggle-excluded-files",
+        "mrmlnc.vscode-scss",
+        "maptz.regionfolder",
+        "dbaeumer.vscode-eslint",
+        "ms-vsliveshare.vsliveshare",
+        "csstools.postcss",
+        "andrewdavidblum.drupal-smart-snippets",
+        "nadim-vscode.twig-code-snippets",
+        "Stanislav.vscode-drupal"
       ]
-    },
-    "intelephense.files.associations": [
-      "*.php",
-      "*.phtml",
-      "*.inc",
-      "*.module",
-      "*.install",
-      "*.theme",
-      "*.profile",
-      "*.tpl.php",
-      "*.test"
-    ],
-    "files.associations": {
-      "*.inc": "php",
-      "*.module": "php",
-      "*.install": "php",
-      "*.theme": "php",
-      "*.profile": "php",
-      "*.tpl.php": "php",
-      "*.test": "php",
-      "*.php": "php",
-      "*.info": "ini",
-      "*.html": "twig",
-      "*.asp": "asp",
-      "*.gs": "javascript"
-    },
-    "emmet.includeLanguages": {
-      "twig": "html"
-    },
-    "files.trimTrailingWhitespace": true,
-    "files.insertFinalNewline": true,
-    "html.format.enable": true,
-    "html.format.wrapLineLength": 80,
-    /* Empty Indent */
-    "emptyIndent.removeIndent": true,
-    "emptyIndent.highlightIndent": false,
-    "emptyIndent.highlightColor": "rgba(246,36,89,0.6)",
-    /* Disable for Drupal 7 */
-    "phpcs.enable": true,
-    "phpcs.standard": "Drupal,DrupalPractice",
-    /* END Disable for Drupal 7 */
-    "php.validate.enable": true,
-    "php.validate.run": "onType",
-    "php.suggest.basic": false,
-    "intelephense.environment.documentRoot": "core/index.php",
-    "intelephense.format.braces": "k&r",
-    "php-docblocker.gap": true,
-    "php-docblocker.useShortNames": true,
-    "editor.bracketPairColorization.enabled": true,
-    "editor.colorDecorators": true,
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "editor.formatOnType": true,
-    "editor.guides.bracketPairs": true,
-    "editor.guides.bracketPairsHorizontal": "active",
-    "editor.inlineSuggest.enabled": true,
-    "git.promptToSaveFilesBeforeCommit": "always",
-    "todo-tree.general.tags": [
-      "TODO",
-      "FIXME",
-      "NOTE",
-      "NEXT",
-      "[ ]",
-      "[x]"
-    ],
-    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
-    "workbench.colorCustomizations": {
-      "sash.hoverBorder": "#0897ef",
-      "titleBar.activeBackground": "#0678be",
-      "titleBar.activeForeground": "#e7e7e7",
-      "titleBar.inactiveBackground": "#0678be99",
-      "titleBar.inactiveForeground": "#e7e7e799"
-    },
-    "peacock.remoteColor": "#0678be",
-    "conventionalCommits.emojiFormat": "emoji"
+    }
   },
-  // Add the IDs of extensions you want installed when the container is created.
-  "extensions": [
-    "felixfbecker.php-debug",
-    "bmewburn.vscode-intelephense-client",
-    "xdebug.php-debug",
-    "DotJoshJohnson.xml",
-    "WakaTime.vscode-wakatime",
-    "VisualStudioExptTeam.vscodeintellicode",
-    "rbbit.typescript-hero",
-    "xshrim.txt-syntax",
-    // "tsega.drupal-8-twig-snippets",
-    "Gruntfuggly.todo-tree",
-    "richie5um2.vscode-sort-json",
-    "mechatroner.rainbow-csv",
-    "esbenp.prettier-vscode",
-    "christian-kohler.path-intellisense",
-    "christian-kohler.npm-intellisense",
-    "stringham.move-ts",
-    "HookyQR.minify",
-    "DavidAnson.vscode-markdownlint",
-    "bierner.markdown-mermaid",
-    "shd101wyy.markdown-preview-enhanced",
-    "Tyriar.lorem-ipsum",
-    "Zignd.html-css-class-completion",
-    "bradgashler.htmltagwrap",
-    "ecmel.vscode-html-css",
-    "eamodio.gitlens",
-    "GitHub.vscode-pull-request-github",
-    "GitHub.copilot",
-    "mhutchie.git-graph",
-    "rifi2k.format-html-in-php",
-    "marcostazi.VS-code-drupal",
-    "pranaygp.vscode-css-peek",
-    "vivaxy.vscode-conventional-commits",
-    "naumovs.color-highlight",
-    "streetsidesoftware.code-spell-checker",
-    "wmaurer.change-case",
-    "michelemelluso.code-beautifier",
-    "ikappas.composer",
-    "mblode.twig-language-2",
-    "ValeryanM.vscode-phpsab",
-    "neilbrayfield.php-docblocker",
-    "DmitryDorofeev.empty-indent",
-    "eamodio.toggle-excluded-files",
-    "mrmlnc.vscode-scss",
-    "maptz.regionfolder",
-    "dbaeumer.vscode-eslint",
-    "ms-vsliveshare.vsliveshare",
-    "csstools.postcss"
-  ],
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [
     80,
