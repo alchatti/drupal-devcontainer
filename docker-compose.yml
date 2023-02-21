@@ -30,6 +30,11 @@ services:
       - "../.dev:/var/www/site-dev"
       - "..:/var/www/html"
     command: sleep infinity
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 18080:8080
 volumes:
   database_store:
   acquia:
