@@ -6,8 +6,7 @@ services:
     restart: unless-stopped
     env_file:
       - "./devcontainer.env"
-    environment:
-      cap_add: "SYS_NICE"
+    cap_add: "SYS_NICE"
     ports:
       - "3306:3306"
     volumes:
@@ -19,12 +18,12 @@ services:
     env_file:
       - "./devcontainer.env"
     volumes:
-      # - "pnpm-store:/home/vscode/.pnpm-store"
       - "~/.acquia:/home/vscode/.acquia" # Acquia Cloud Cli Share with host
       - "~/.ssh:/home/vscode/.ssh" # SSH Keys share with host
       - "~/.wakatime.cfg:/home/vscode/.wakatime.cfg" # Wakatime share with host
       - "../.dev:/var/www/site-dev"
       - "..:/var/www/html"
+      # - "pnpm-store:/home/vscode/.pnpm-store"
     command: sleep infinity
 volumes:
   database:
