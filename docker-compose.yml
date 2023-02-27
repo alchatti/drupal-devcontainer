@@ -6,7 +6,8 @@ services:
     restart: unless-stopped
     env_file:
       - "./devcontainer.env"
-    cap_add: "SYS_NICE"
+    cap_add:
+      - SYS_NICE
     ports:
       - "3306:3306"
     volumes:
