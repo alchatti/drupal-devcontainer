@@ -14,7 +14,7 @@ services:
       - database:/var/lib/mysql
       # - "../dump/init.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
-    image: alchatti/drupal-devcontainer:8.1
+    image: alchatti/drupal-devcontainer:8.2
     env_file:
       - "./devcontainer.env"
     volumes:
