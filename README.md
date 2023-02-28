@@ -69,8 +69,11 @@ For more information on devcontainer refer to <https://code.visualstudio.com/doc
 
 Once setup is completed under `.devcontainer` directory you can find the following files:
 
-- `config/mysql.cnf`: MySQL configuration file.
-- `config/dev.setttings.php`: Devcontainer Drupal site configuration and environment based Database connection.
+- `.dev/example.dev.setttings.php`: Devcontainer Drupal site configuration and environment based Database connection.
+- `.dev/example.drush.yml`: Drush configuration file.
+- `.dev/example.gitignore`: Gitignore file.
+- `.dev/example.launch.json`: VS Code launch configuration for XDebug.
+- `.dev/example.mysql.cnf`: MySQL configuration file.
 
 ## Development settings `dev.setttings.php`
 
@@ -98,6 +101,12 @@ if (file_exists('/var/www/site-dev/dev.settings.php')) {
 
 ```bash
 cp .devcontainer/.dev/example.gitignore  ./.gitignore
+```
+
+5.For XDebug with VS Code, copy `launch.json` to `.vscode` folder.
+
+```bash
+cp .devcontainer/.vscode/launch.json ./.vscode/launch.json
 ```
 
 ### Change default shell
@@ -139,6 +148,30 @@ It is recommended to change the default config sync folder location out of the d
 ```bash
 ### In settings.php add the following line
 $settings['config_sync_directory'] = '../config';
+```
+
+### Salt for Drupal 10
+
+In Drupal 10, the `settings.php` file has a new `settings['hash_salt']` property. You can generate a random string using the following command:
+
+```bash
+openssl rand -base64 64 > $WR/.drupal-salt
+```
+
+Then add the following line to your `settings.php` file:
+
+```php
+$settings['hash_salt'] = file_get_contents('../.drupal-salt');
+```
+
+### The end of settings.php file
+
+```php
+$settings['config_sync_directory'] = '../config';
+$settings['hash_salt'] = file_get_contents('../.drupal-salt');
+if (file_exists('/var/www/site-dev/dev.settings.php')) {
+  include '/var/www/site-dev/dev.settings.php';
+}
 ```
 
 ## Reference
