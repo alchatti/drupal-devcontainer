@@ -206,7 +206,8 @@
         "csstools.postcss",
         "andrewdavidblum.drupal-smart-snippets",
         "nadim-vscode.twig-code-snippets",
-        "Stanislav.vscode-drupal"
+        "Stanislav.vscode-drupal",
+        "PeterSchmalfeldt.explorer-exclude"
       ]
     }
   },
