@@ -109,10 +109,8 @@
         "emptyIndent.removeIndent": true,
         "emptyIndent.highlightIndent": false,
         "emptyIndent.highlightColor": "rgba(246,36,89,0.6)",
-        /* Disable for Drupal 7 */
         "phpcs.enable": true,
         "phpcs.standard": "Drupal,DrupalPractice",
-        /* END Disable for Drupal 7 */
         "php.validate.enable": true,
         "php.validate.run": "onType",
         "php.suggest.basic": false,
