@@ -23,6 +23,7 @@ services:
       - "~/.ssh:/home/vscode/.ssh" # SSH Keys share with host
       - "~/.wakatime.cfg:/home/vscode/.wakatime.cfg" # Wakatime share with host
       - "../.dev:/var/www/site-dev"
+      - "./config/drush.yml:/home/vscode/.drush/drush.yml"
       - "..:/var/www/html"
       # - "pnpm-store:/home/vscode/.pnpm-store"
     command: sleep infinity
