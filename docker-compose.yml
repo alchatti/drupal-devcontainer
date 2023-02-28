@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  db:
+  database:
     image: mysql:8
     restart: unless-stopped
     env_file:
