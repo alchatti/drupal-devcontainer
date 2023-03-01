@@ -177,3 +177,5 @@ deployment_identifier
 /.gitattributes
 
 .docker
+.vscode
+!.vscode/launch.json

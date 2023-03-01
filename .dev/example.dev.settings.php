@@ -11,19 +11,32 @@
  * settings.php.
  *
  * # $settings['config_sync_directory'] = '../config';
+ * # $settings['hash_salt'] = file_get_contents('../salt.cnf');
+ * #
  * # if (file_exists('/var/www/site-dev/dev.settings.php')) {
  * #  include '/var/www/site-dev/dev.settings.php';
  * # }
  */
 
+// PHP
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
+$conf['error_level'] = 2; // Show all messages on your screen
+error_reporting(1); // Have PHP complain about absolutely everything.
+
 $db_name = $_ENV['MYSQL_DATABASE'];
+
+if (!isset($databases)) {
+  $databases = [];
+}
 
 $databases['default']['default'] = [
   'database' => $_ENV['MYSQL_DATABASE'],
   'username' => $_ENV['MYSQL_USER'],
   'password' => $_ENV['MYSQL_PASSWORD'],
   'prefix' => '',
-  'host' => 'db',
+  'host' => 'database',
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
@@ -34,12 +47,8 @@ $databases['default']['default'] = [
 ];
 
 $settings['trusted_host_patterns'] = [
-  'localhost',
+  '^localhost$',
 ];
-
-$base_url = 'http://localhost';
-
-$options['uri'] = 'http://localhost';
 
 /**
  * Assertions.
@@ -51,19 +60,14 @@ $options['uri'] = 'http://localhost';
  * @see http://php.net/assert
  * @see https://www.drupal.org/node/2492225
  *
- * If you are using PHP 7.0 it is strongly recommended that you set
- * zend.assertions=1 in the PHP.ini file (It cannot be changed from .htaccess
- * or runtime) on development machines and to 0 in production.
+ * It is strongly recommended that you set zend.assertions=1 in the PHP.ini file
+ * (It cannot be changed from .htaccess or runtime) on development machines and
+ * to 0 or -1 in production.
  *
  * @see https://wiki.php.net/rfc/expectations
  */
 assert_options(ASSERT_ACTIVE, TRUE);
-\Drupal\Component\Assertion\Handle::register();
-
-/**
- * Enable local development services.
- */
-$settings['container_yamls'][] = DRUPAL_ROOT . '/sites/development.services.yml';
+assert_options(ASSERT_EXCEPTION, TRUE);
 
 /**
  * Show all error messages, with backtrace information.
@@ -78,48 +82,6 @@ $config['system.logging']['error_level'] = 'verbose';
  */
 $config['system.performance']['css']['preprocess'] = FALSE;
 $config['system.performance']['js']['preprocess'] = FALSE;
-
-/**
- * Disable Internal Page Cache.
- *
- * Note: you should test with Internal Page Cache enabled, to ensure the correct
- * cacheability metadata is present. However, in the early stages of
- * development, you may want to disable it.
- *
- * This setting disables the page cache by using the Null cache back-end
- * defined by the development.services.yml file above.
- *
- * Only use this setting once the site has been installed.
- */
-$settings['cache']['bins']['page'] = 'cache.backend.null';
-
-/**
- * Disable Dynamic Page Cache.
- *
- * Note: you should test with Dynamic Page Cache enabled, to ensure the correct
- * cacheability metadata is present (and hence the expected behavior). However,
- * in the early stages of development, you may want to disable it.
- */
-$settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
-
-/**
- * Allow test modules and themes to be installed.
- *
- * Drupal ignores test modules and themes by default for performance reasons.
- * During development it can be useful to install test extensions for debugging
- * purposes.
- */
-$settings['extension_discovery_scan_tests'] = TRUE;
-
-/**
- * Enable access to rebuild.php.
- *
- * This setting can be enabled to allow Drupal's php and database cached
- * storage to be cleared via the rebuild.php page. Access to this page can also
- * be gained by generating a query string from rebuild_token_calculator.sh and
- * using these parameters in a request to rebuild.php.
- */
-# $settings['rebuild_access'] = TRUE;
 
 /**
  * Skip file system permissions hardening.

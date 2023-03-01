@@ -1,30 +1,31 @@
 version: "3.8"
 
 services:
-  db:
+  database:
     image: mysql:8
     restart: unless-stopped
     env_file:
       - "./devcontainer.env"
-    environment:
-      cap_add: "SYS_NICE"
+    cap_add:
+      - SYS_NICE
     ports:
       - "3306:3306"
     volumes:
-      - "./config/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
+      - "../dev/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
       - database:/var/lib/mysql
       # - "../dump/init.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
-    image: alchatti/drupal-devcontainer:8.1
+    image: alchatti/drupal-devcontainer:8.2
     env_file:
       - "./devcontainer.env"
     volumes:
-      # - "pnpm-store:/home/vscode/.pnpm-store"
       - "~/.acquia:/home/vscode/.acquia" # Acquia Cloud Cli Share with host
       - "~/.ssh:/home/vscode/.ssh" # SSH Keys share with host
       - "~/.wakatime.cfg:/home/vscode/.wakatime.cfg" # Wakatime share with host
       - "../.dev:/var/www/site-dev"
+      - "../.dev/drush.yml:/home/vscode/.drush/drush.yml"
       - "..:/var/www/html"
+      # - "pnpm-store:/home/vscode/.pnpm-store"
     command: sleep infinity
 volumes:
   database:
