@@ -101,7 +101,9 @@ devcontainer open .
 
 ## Drupal first time setup
 
-1.Install Drupal using composer
+Insied the devcontainer `/var/www/html`
+
+1.Install Drupal using `init.sh` script
 
 ```bash
 init.sh
