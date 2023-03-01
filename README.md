@@ -27,67 +27,87 @@ For devcontainer to work, your Drupal project folder structure should look simil
 └── 📄 composer.lock
 ```
 
-## Setup a new project
-
-1. Create a new project directory `my-drupal-site` and change to it.
-
-```bash
-mkdir my-drupal-site && cd my-drupal-site
-```
-
-2. Intialize the `git` in the directory
-
-```bash
-git init
-```
-
-3. Add this repo as a submodule under the folder `.devcontainer`
-
-```bash
-git submodule add https://github.com/alchatti/devcontainer-drupal.git .devcontainer
-```
-
-4. Make an empty `docroot` folder
-
-```bash
-mkdir docroot
-```
-
-5. Build & launch the devcontainer project
-
-```sh
-devcontainer build .
-```
-
-```sh
-devcontainer open .
-```
-
-For more information on devcontainer refer to <https://code.visualstudio.com/docs/remote/devcontainer-cli>.
-
-## Configurations
-
-Once setup is completed under `.devcontainer` directory you can find the following files:
-
 - `.dev/example.dev.setttings.php`: Devcontainer Drupal site configuration and environment based Database connection.
 - `.dev/example.drush.yml`: Drush configuration file.
 - `.dev/example.gitignore`: Gitignore file.
 - `.dev/example.launch.json`: VS Code launch configuration for XDebug.
 - `.dev/example.mysql.cnf`: MySQL configuration file.
 
-## Development settings `dev.setttings.php`
+## Requirements
 
-To use this file and limit it to development environment, you can use the following steps:
+- [Docker](https://www.docker.com/products/docker-desktop)
+- [VS Code](https://code.visualstudio.com/)
+- [VS Code Remote Development Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
 
-1. Copy the example file to your project directory under `.dev`.
+### Setup a new project
+
+1.Create a new project directory `my-drupal-site` and change to it.
 
 ```bash
-mkdir .dev && \
-cp .devcontainer/.dev/example.dev.settings.php \
-./.dev/dev.settings.php
+mkdir my-drupal-site && cd my-drupal-site
 ```
 
-2.Add the following code to the end of your site `settings.php` file.
+2.Initialize the `git` in the directory
+
+```bash
+git init
+```
+
+3.Add this repo as a submodule as `.devcontainer`
+
+```bash
+git submodule add https://github.com/alchatti/devcontainer-drupal.git .devcontainer
+```
+
+4.Create `docroot`, `.dev` directories.
+
+```bash
+mkdir docroot && mkdir .dev
+```
+
+5.If doesn't exist create `.vscode` directory for PHP debugging.
+
+```bash
+mkdir .vscode
+```
+
+6.Copy `example.*` files to your project for customizations.
+
+```bash
+cp .devcontainer/.dev/example.dev.settings.php ./.dev/dev.settings.php && \
+cp .devcontainer/.dev/example.drush.yml ./.dev/drush.yml && \
+cp .devcontainer/.dev/example.gitignore ./.dev/gitignore && \
+cp .devcontainer/.dev/example.launch.json ./.vscode/launch.json && \
+cp .devcontainer/.dev/example.mysql.cnf ./.dev/mysql.cnf
+```
+
+7.Build the devcontainer (one time only)
+
+```bash
+devcontainer build .
+```
+
+| This version of the devcontainer cli is installed using vscode through quick open command.
+
+For more information on devcontainer refer to <https://code.visualstudio.com/docs/remote/devcontainer-cli>.
+
+### Start the devcontainer
+
+8.To start the devcontainer from commandline you can always use
+
+```bash
+devcontainer open .
+```
+
+## Drupal first time setup
+
+1.Install Drupal using composer
+
+```bash
+init.sh
+```
+
+2.Add the following code to the end of your site `docroot/sites/default/settings.php` file.
 
 ```php
 if (file_exists('/var/www/site-dev/dev.settings.php')) {
@@ -95,19 +115,40 @@ if (file_exists('/var/www/site-dev/dev.settings.php')) {
 }
 ```
 
-3.docker-compose mapes the `.dev` directory to `/var/www/site-php/`
+### Recommended Drupal configuration
 
-4.For optional `gitignore` copy the file under `.dev` to root of your project.
-
-```bash
-cp .devcontainer/.dev/example.gitignore  ./.gitignore
-```
-
-5.For XDebug with VS Code, copy `launch.json` to `.vscode` folder.
+- Secure the `config` sync directory by moving it outside of docroot.
 
 ```bash
-cp .devcontainer/.vscode/launch.json ./.vscode/launch.json
+### In settings.php add the following line
+$settings['config_sync_directory'] = '../config';
 ```
+
+#### Move salt to a file outside of docroot
+
+- Generate a random salt and save it to a file outside of docroot.
+
+```bash
+openssl rand -base64 64 > $WR/.drupal-salt
+```
+
+- Append to the end `docroot/sites/default/settings.php` the following.
+
+```php
+$settings['hash_salt'] = file_get_contents('../.drupal-salt');
+```
+
+### docroot/sites/default/settings.php
+
+```php
+$settings['config_sync_directory'] = '../config';
+$settings['hash_salt'] = file_get_contents('../.drupal-salt');
+if (file_exists('/var/www/site-dev/dev.settings.php')) {
+  include '/var/www/site-dev/dev.settings.php';
+}
+```
+
+## Quality of life
 
 ### Change default shell
 
@@ -133,46 +174,11 @@ In `devcontainer.json` you can change the default shell & theme by updating the 
  },
 ```
 
-## Quality of life
-
 ### Sharing Git credentials with your container
 
 To use your credential helper and SSH keys within the devcontainer instance use the following guide <https://code.visualstudio.com/docs/remote/containers#_sharing-git-credentials-with-your-container>.
 
 If you are using WSL2 you need to configure that first before using it in the devcontainer.
-
-### Config Sync folder location
-
-It is recommended to change the default config sync folder location out of the docroot folder.
-
-```bash
-### In settings.php add the following line
-$settings['config_sync_directory'] = '../config';
-```
-
-### Salt for Drupal 10
-
-In Drupal 10, the `settings.php` file has a new `settings['hash_salt']` property. You can generate a random string using the following command:
-
-```bash
-openssl rand -base64 64 > $WR/.drupal-salt
-```
-
-Then add the following line to your `settings.php` file:
-
-```php
-$settings['hash_salt'] = file_get_contents('../.drupal-salt');
-```
-
-### The end of settings.php file
-
-```php
-$settings['config_sync_directory'] = '../config';
-$settings['hash_salt'] = file_get_contents('../.drupal-salt');
-if (file_exists('/var/www/site-dev/dev.settings.php')) {
-  include '/var/www/site-dev/dev.settings.php';
-}
-```
 
 ## Reference
 
