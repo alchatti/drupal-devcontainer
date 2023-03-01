@@ -56,7 +56,7 @@ git init
 3.Add this repo as a submodule as `.devcontainer`
 
 ```bash
-git submodule add https://github.com/alchatti/devcontainer-drupal.git .devcontainer
+git submodule add https://github.com/alchatti/drupal-devcontainer.git .devcontainer
 ```
 
 4.Create `docroot`, `.dev` directories.
