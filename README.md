@@ -14,9 +14,11 @@ For devcontainer to work, your Drupal project folder structure should look simil
 
 ```text
 📂 My-Project
+├── 📂.dev
 ├── 📂.devcontainer
 ├── 📂.git
 ├── 📂.vscode
+├── 📂 config
 ├── 📂 docroot
 ├── 📂 dump
 ├── 📂 vendor
@@ -62,7 +64,7 @@ git submodule add https://github.com/alchatti/drupal-devcontainer.git .devcontai
 4.Create `docroot`, `.dev` directories.
 
 ```bash
-mkdir docroot && mkdir .dev
+mkdir docroot && mkdir .dev && mkdir config
 ```
 
 5.If doesn't exist create `.vscode` directory for PHP debugging.
