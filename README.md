@@ -76,7 +76,7 @@ mkdir .vscode
 ```bash
 cp .devcontainer/.dev/example.dev.settings.php ./.dev/dev.settings.php && \
 cp .devcontainer/.dev/example.drush.yml ./.dev/drush.yml && \
-cp .devcontainer/.dev/example.gitignore ./.dev/gitignore && \
+cp .devcontainer/.dev/example.gitignore ./.gitignore && \
 cp .devcontainer/.dev/example.launch.json ./.vscode/launch.json && \
 cp .devcontainer/.dev/example.mysql.cnf ./.dev/mysql.cnf
 ```
