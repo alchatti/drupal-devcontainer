@@ -109,7 +109,18 @@ Insied the devcontainer `/var/www/html`
 init.sh
 ```
 
-2.Add the following code to the end of your site `docroot/sites/default/settings.php` file.
+2.In browser http://localhost/ and follow the Drupal setup wizard.
+  - you can go for `Demo: Umami Food Magazine (Experimental)` profile to test the site or `Standard` for empty site.
+  - **Set up database**
+      -  **Database type** -  MySQL, MariaDB, Percona Server, or equivalent
+      -  **Database name** - db
+      -  **Database username** - drupal
+      -  **Database password** - drupalPASS
+      -  **Advanced options > Host** - database
+  -  Once site installed, complete the wizard to setup admin user an the time zone.  
+
+
+3.Add the following code to the end of your site `docroot/sites/default/settings.php` file or follow the recommended _Drupal conmfiguration_ section below.
 
 ```php
 if (file_exists('/var/www/site-dev/dev.settings.php')) {
@@ -119,35 +130,30 @@ if (file_exists('/var/www/site-dev/dev.settings.php')) {
 
 ### Recommended Drupal configuration
 
-- Secure the `config` sync directory by moving it outside of docroot.
-
-```bash
-### In settings.php add the following line
-$settings['config_sync_directory'] = '../config';
-```
-
-#### Move salt to a file outside of docroot
-
-- Generate a random salt and save it to a file outside of docroot.
+- Generate a new salt file outside of docroot.
 
 ```bash
 openssl rand -base64 64 > $WR/.drupal-salt
 ```
 
-- Append to the end `docroot/sites/default/settings.php` the following.
+- Append the following to `docroot/sites/default/settings.php`
 
 ```php
-$settings['hash_salt'] = file_get_contents('../.drupal-salt');
-```
-
-### docroot/sites/default/settings.php
-
-```php
+// Move Config sync folder to outside of Apache public folder
 $settings['config_sync_directory'] = '../config';
+// Use the generated salt outside of Apache public folder
 $settings['hash_salt'] = file_get_contents('../.drupal-salt');
+// Use `dev.settings.php` when it exists, docker will mount path when devcontainer
 if (file_exists('/var/www/site-dev/dev.settings.php')) {
   include '/var/www/site-dev/dev.settings.php';
 }
+```
+
+- To login without password `docroot` 
+
+```sh
+cd docroot
+drush uli 0
 ```
 
 ## Quality of life
