@@ -161,7 +161,8 @@
 					"titleBar.inactiveForeground": "#e7e7e799"
 				},
 				"peacock.remoteColor": "#0678be",
-				"conventionalCommits.emojiFormat": "emoji"
+				"conventionalCommits.emojiFormat": "emoji",
+				"intelephense.diagnostics.undefinedProperties": false
 			},
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
