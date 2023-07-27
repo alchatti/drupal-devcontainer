@@ -11,7 +11,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - "../dev/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
+      - "../.dev/mysql.cnf:/etc/mysql/conf.d/zmysql.cnf"
       - database:/var/lib/mysql
       # - "../dump/init.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
