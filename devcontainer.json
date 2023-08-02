@@ -127,32 +127,57 @@
         "editor.guides.bracketPairsHorizontal": "active",
         "editor.inlineSuggest.enabled": true,
         "git.promptToSaveFilesBeforeCommit": "always",
+        "todo-tree.filtering.excludeGlobs": [
+          "**/node_modules/*"
+        ],
         "todo-tree.general.tags": [
           "TODO",
+          "BUG",
+          "HACK",
           "FIXME",
           "NOTE",
-          "NEXT",
           "[ ]",
           "[x]"
         ],
         "todo-tree.highlights.customHighlight": {
           "FIXME": {
-            "icon": "tools",
-            "iconColour": "#FED000"
+            "foreground": "#000",
+            "background": "Yellow",
+            "iconColour": "Yellow",
           },
           "NOTE": {
-            "foreground": "#ce93d8",
-            "icon": "tag",
-            "iconColour": "#ce93d8",
-            "type": "line"
+            "icon": "note",
+            "background": "DarkSlateBlue",
+            "iconColour": "SlateBlue"
           },
-          "TODO": {}
+          "TODO": {
+            "icon": "gear",
+            "foreground": "white",
+            "background": "green",
+            "iconColour": "green",
+          },
+          "HACK": {
+            "icon": "tools",
+            "foreground": "white",
+            "background": "Sienna",
+            "iconColour": "DarkOrange",
+          },
+          "BUG": {
+            "foreground": "#FFF",
+            "background": "#E53935",
+            "iconColour": "#E53935",
+          }
         },
         "todo-tree.highlights.defaultHighlight": {
-          "foreground": "#378805",
-          "type": "none"
+          "type": "text-and-comment",
+          "opacity": 50,
+          "foreground": "#fff",
+          "background": "DimGray",
+          "iconColour": "Silver",
+          "gutterIcon": true
         },
-        "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+        "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS).*(\\n\\s*//\\s{2,}.*)*",
+        "todo-tree.tree.showCountsInTree": true,
         "workbench.colorCustomizations": {
           "sash.hoverBorder": "#0897ef",
           "titleBar.activeBackground": "#0678be",
