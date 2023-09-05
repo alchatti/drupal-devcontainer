@@ -16,7 +16,7 @@ services:
       - db:/var/lib/mysql
       # - "../dump/init.sql:/docker-entrypoint-initdb.d/mydb.sql"
   app:
-    image: alchatti/drupal-devcontainer:7.4
+    image: alchatti/drupal-devcontainer:8.1
     environment:
       MYSQL_USER: "drupal"
       MYSQL_PASSWORD: "drupalpassword"
