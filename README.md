@@ -2,7 +2,13 @@
 
 This project is created to provide a VS Code development container environment for Drupal utilizing the image from [alchatti/drupal-devcontainer-image](https://github.com/alchatti/drupal-devcontainer-image) which is based on Microsoft PHP development container image.
 
-## Usage
+## Requirements
+
+- [Docker](https://www.docker.com/products/docker-desktop)
+- [VS Code](https://code.visualstudio.com/)
+- [VS Code Remote Development Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
+
+## Project Setup
 
 > If you are on Windows use WSL2 filesystem for optimal performance.
 
@@ -29,19 +35,13 @@ For devcontainer to work, your Drupal project folder structure should look simil
 └── 📄 composer.lock
 ```
 
-- `.dev/example.dev.setttings.php`: Devcontainer Drupal site configuration and environment based Database connection.
-- `.dev/example.drush.yml`: Drush configuration file.
+- `.dev/dev.setttings.php`: Devcontainer Drupal site configuration and environment based Database connection.
+- `.dev/drush.yml`: Drush configuration file.
 - `.dev/example.gitignore`: Gitignore file.
 - `.dev/example.launch.json`: VS Code launch configuration for XDebug.
 - `.dev/example.mysql.cnf`: MySQL configuration file.
 
-## Requirements
-
-- [Docker](https://www.docker.com/products/docker-desktop)
-- [VS Code](https://code.visualstudio.com/)
-- [VS Code Remote Development Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
-
-### Setup a new project
+## Setup
 
 1.Create a new project directory `my-drupal-site` and change to it.
 
@@ -55,11 +55,28 @@ mkdir my-drupal-site && cd my-drupal-site
 git init
 ```
 
-3.Add this repo as a submodule as `.devcontainer`
+### 2. Setting up .devcontainer
+
+#### A. Using files
+
+Download the files from [main branch](https://github.com/alchatti/drupal-devcontainer/archive/refs/heads/main.zip), then unzip content to `.devcontainer`
+
+```bash
+curl -L https://github.com/alchatti/drupal-devcontainer/archive/refs/heads/main.zip -o devcontainer.zip && \
+unzip devcontainer.zip -d devcontainer && \
+mv devcontainer/drupal-devcontainer-main .devcontainer && \
+rm -rf devcontainer devcontainer.zip
+```
+
+### B. Setup using submodule
+
+Add this repo as a submodule as `.devcontainer`
 
 ```bash
 git submodule add https://github.com/alchatti/drupal-devcontainer.git .devcontainer
 ```
+
+### 3. Setting up the folder structure
 
 4.Create `docroot`, `.dev` directories.
 
@@ -112,17 +129,17 @@ init.sh
 ```
 
 2.In browser http://localhost/ and follow the Drupal setup wizard.
-  - you can go for `Demo: Umami Food Magazine (Experimental)` profile to test the site or `Standard` for empty site.
-  - **Set up database**
-      -  **Database type** -  MySQL, MariaDB, Percona Server, or equivalent
-      -  **Database name** - db
-      -  **Database username** - drupal
-      -  **Database password** - drupalPASS
-      -  **Advanced options > Host** - database
-  -  Once site installed, complete the wizard to setup admin user an the time zone.  
 
+- you can go for `Demo: Umami Food Magazine (Experimental)` profile to test the site or `Standard` for empty site.
+- **Set up database**
+  - **Database type** - MySQL, MariaDB, Percona Server, or equivalent
+  - **Database name** - db
+  - **Database username** - drupal
+  - **Database password** - drupalPASS
+  - **Advanced options > Host** - database
+- Once site installed, complete the wizard to setup admin user an the time zone.
 
-3.Add the following code to the end of your site `docroot/sites/default/settings.php` file or follow the recommended _Drupal conmfiguration_ section below.
+  3.Add the following code to the end of your site `docroot/sites/default/settings.php` file or follow the recommended _Drupal conmfiguration_ section below.
 
 ```php
 if (file_exists('/var/www/site-dev/dev.settings.php')) {
@@ -151,7 +168,7 @@ if (file_exists('/var/www/site-dev/dev.settings.php')) {
 }
 ```
 
-- To login without password `docroot` 
+- To login without password `docroot`
 
 ```sh
 cd docroot
