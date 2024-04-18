@@ -25,6 +25,7 @@ services:
       - "../.dev:/var/www/site-dev"
       - "../.dev/drush.yml:/home/vscode/.drush/drush.yml"
       - "..:/var/www/html"
+      - "../.dev/php.ini:/usr/local/etc/php/conf.d/z-docker-local-php.ini"
       # - "pnpm-store:/home/vscode/.pnpm-store"
     command: sleep infinity
 volumes:
